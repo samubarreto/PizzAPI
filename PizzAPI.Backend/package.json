@@ -1,6 +1,8 @@
 {
   "name": "pizzapi.backend",
+  "private": true,
   "version": "1.0.0",
+  "type": "module",
   "description": "backend do pizzapi",
   "main": "index.js",
   "scripts": {
