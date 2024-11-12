@@ -1,9 +1,8 @@
 <div align="center">
 
   # PizzAPI 🍕
+  ![My Skills](https://skillicons.dev/icons?i=js,ts,react,nodejs,express,mongodb)
   ###### Aplicação Web para cadastrar e administrar sabores de Pizza e Pedidos
-
-  ![My Skills](https://skillicons.dev/icons?i=ts,react,nodejs,express,mongodb)
 
 </div>
 
