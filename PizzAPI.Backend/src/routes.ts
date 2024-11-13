@@ -7,7 +7,8 @@ export const router = Router();
 const pizzaService = new PizzaService();
 const pizzaController = new PizzaController(pizzaService);
 
-router.get('/pizza', pizzaController.getPizzas)
-router.get('/pizza/:id', pizzaController.getPizzaById)
-router.post('/pizza', pizzaController.upsertPizza)
-router.delete('/pizza/:id', pizzaController.deletePizza)
+router.get('/pizza', pizzaController.getPizzas);
+router.get('/pizza/:id', pizzaController.getPizzaById);
+router.post('/pizza/:id', pizzaController.upsertPizza);
+router.put('/pizza/:id', pizzaController.upsertPizza);
+router.delete('/pizza/:id', pizzaController.deletePizza);

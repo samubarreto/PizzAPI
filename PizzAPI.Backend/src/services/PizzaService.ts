@@ -1,5 +1,6 @@
-import { Pizza } from "../dtos/Pizza";
+import { Pizza } from "../entities/Pizza";
 import { IPizzaService } from "../interfaces/IPizzaService";
+// implementar mongodb
 
 export class PizzaService implements IPizzaService {
   getPizzaById = (id: number): Pizza => {
@@ -12,7 +13,7 @@ export class PizzaService implements IPizzaService {
     // to do
   }
 
-  upsertPizza = (id: number): Pizza => {
+  upsertPizza = (id?: number): Pizza => {
     return {} as Pizza;
     // to do
   }

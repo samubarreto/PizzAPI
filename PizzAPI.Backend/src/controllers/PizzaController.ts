@@ -16,26 +16,23 @@ export class PizzaController {
 
   getPizzaById = (req: Request, res: Response) => {
     const pizzaId = parseInt(req.params["id"]);
-    return res.status(200).json(this.pizzaService.getPizzaById(pizzaId));
+    if (!pizzaId) return res.status(400)
+
+    const result = this.pizzaService.getPizzaById(pizzaId);
+    if (result == null) return res.status(404);
+    return res.status(200).json(result);
   }
 
   upsertPizza = (req: Request, res: Response) => {
-    const pizzaId = parseInt(req.params["id"]) || 0;
+    const pizzaId = parseInt(req.params["id"]) || undefined;
     this.pizzaService.upsertPizza(pizzaId);
     return res.status(201); // ou 200 se for update
   }
 
   deletePizza = (req: Request, res: Response) => {
-    const deletedPizzaId = parseInt(req.params["id"]);
-
-    if (!deletedPizzaId) {
-      return res.status(400)
-    }
-
-    if (this.pizzaService.deletePizza(deletedPizzaId)) {
-      return res.status(204)
-    } else {
-      return res.status(404)
-    }
+    const pizzaId = parseInt(req.params["id"]);
+    if (!pizzaId) return res.status(400)
+    if (this.pizzaService.deletePizza(pizzaId)) return res.status(204)
+    return res.status(404)
   }
 }
