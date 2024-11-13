@@ -8,13 +8,18 @@ export class PizzaService implements IPizzaService {
     // to do
   }
 
-  getPizzas = (skip: number, pageSize: number): Pizza[] => {
+  getPizzas = (skip: number, pageSize: number, search: string): Pizza[] => {
     return [{}] as Pizza[];
     // to do
   }
 
-  upsertPizza = (id?: number): Pizza => {
-    return {} as Pizza;
+  insertPizza(pizza: Pizza): boolean {
+    return true;
+    // to do
+  }
+
+  updatePizza(pizza: Pizza): boolean {
+    return true;
     // to do
   }
 

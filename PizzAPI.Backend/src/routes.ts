@@ -9,6 +9,6 @@ const pizzaController = new PizzaController(pizzaService);
 
 router.get('/pizza', pizzaController.getPizzas);
 router.get('/pizza/:id', pizzaController.getPizzaById);
-router.post('/pizza/:id', pizzaController.upsertPizza);
-router.put('/pizza/:id', pizzaController.upsertPizza);
+router.post('/pizza', pizzaController.insertPizza);
+router.put('/pizza', pizzaController.updatePizza);
 router.delete('/pizza/:id', pizzaController.deletePizza);

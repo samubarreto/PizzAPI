@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { IPizzaService } from '../interfaces/IPizzaService';
+import { Pizza } from '../entities/Pizza';
 
 export class PizzaController {
   private pizzaService: IPizzaService;
@@ -9,9 +10,11 @@ export class PizzaController {
   }
 
   getPizzas = (req: Request, res: Response) => {
-    const skip = parseInt(req.params["skip"]) || 0;
-    const pageSize = parseInt(req.params["pageSize"]) || 10;
-    return res.status(200).json(this.pizzaService.getPizzas(skip, pageSize));
+    const skip: number = parseInt(req.params["skip"]) || 0;
+    const pageSize: number = parseInt(req.params["pageSize"]) || 10;
+    const search: string = req.params["search"]
+
+    return res.status(200).json(this.pizzaService.getPizzas(skip, pageSize, search));
   }
 
   getPizzaById = (req: Request, res: Response) => {
@@ -23,10 +26,22 @@ export class PizzaController {
     return res.status(200).json(result);
   }
 
-  upsertPizza = (req: Request, res: Response) => {
-    const pizzaId = parseInt(req.params["id"]) || undefined;
-    this.pizzaService.upsertPizza(pizzaId);
-    return res.status(201); // ou 200 se for update
+  insertPizza = (req: Request, res: Response) => {
+    const pizza: Pizza = req.body;
+    const result = this.pizzaService.insertPizza(pizza);
+
+    if (result)
+      return res.status(201);
+    return res.status(422);
+  }
+
+  updatePizza = (req: Request, res: Response) => {
+    const pizza: Pizza = req.body;
+    const result = this.pizzaService.updatePizza(pizza);
+
+    if (result)
+      return res.status(200);
+    return res.status(422);
   }
 
   deletePizza = (req: Request, res: Response) => {
