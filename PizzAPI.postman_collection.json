@@ -206,7 +206,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"pizzas\": [\r\n        { \"pizzaId\": 1, \"quantidade\": 2 },\r\n        { \"pizzaId\": 2, \"quantidade\": 1 }\r\n    ],\r\n    \"cliente\": \"João Silva\",\r\n    \"endereco\": \"Rua das Pizzas, 123, Bairro Central\",\r\n    \"metodoPagamento\": 0,\r\n    \"status\": 1,\r\n    \"observacoes\": \"Incluir talheres descartáveis\"\r\n}\r\n",
+							"raw": "{\r\n    \"pizzas\": [\r\n        { \"pizzaId\": \"6736082d48b945a692163d49\", \"quantidade\": 2 }\r\n    ],\r\n    \"cliente\": \"João Silva\",\r\n    \"endereco\": \"Rua das Pizzas, 123, Bairro Central\",\r\n    \"metodoPagamento\": 0,\r\n    \"status\": 1,\r\n    \"observacoes\": \"Incluir talheres descartáveis\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -232,7 +232,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"pizzas\": [\r\n        { \"pizzaId\": 1, \"quantidade\": 2 },\r\n        { \"pizzaId\": 2, \"quantidade\": 1 }\r\n    ],\r\n    \"cliente\": \"João Silva\",\r\n    \"endereco\": \"Rua das Pizzas, 123, Bairro Central\",\r\n    \"metodoPagamento\": 0,\r\n    \"status\": 1,\r\n    \"criadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"atualizadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"entregueEm\": null,\r\n    \"observacoes\": \"Incluir talheres descartáveis\"\r\n}\r\n",
+							"raw": "{\r\n    \"id\": \"67360bc9524e825f3a734cf8\",\r\n    \"pizzas\": [\r\n        { \"pizzaId\": \"6736082d48b945a692163d49\", \"quantidade\": 2 }\r\n    ],\r\n    \"cliente\": \"João Silvaaaaaa\",\r\n    \"endereco\": \"Rua das Pizzas, 123, Bairro Central\",\r\n    \"metodoPagamento\": 0,\r\n    \"status\": 1,\r\n    \"entregueEm\": null,\r\n    \"observacoes\": \"Incluir talheres descartáveis\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -257,13 +257,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/pedido/1",
+							"raw": "{{baseUrl}}/pedido/67360bc9524e825f3a734cf8",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"pedido",
-								"1"
+								"67360bc9524e825f3a734cf8"
 							]
 						}
 					},
