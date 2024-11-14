@@ -9,6 +9,11 @@ export class PedidoController {
     this.pedidoService = pedidoService
   }
 
+  count = async (req: Request, res: Response) => {
+    const countPedidos = await this.pedidoService.count();
+    return res.status(200).send(countPedidos.toString());
+  };
+
   getPedidoById = async (req: Request, res: Response) => {
     const pedidoId = req.params["id"];
     try {

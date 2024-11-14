@@ -22,6 +22,7 @@ export function createRoutes(db: Db) {
   const pedidoController = new PedidoController(pedidoService);
 
   router.get('/pedido', pedidoController.getPedidos);
+  router.get('/pedidoCounte', pedidoController.count);
   router.get('/pedido/:id', pedidoController.getPedidoById);
   router.post('/pedido', pedidoController.upsertPedido);
   router.put('/pedido', pedidoController.upsertPedido);
