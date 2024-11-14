@@ -57,12 +57,16 @@ export class PizzaService implements IPizzaService {
   async updatePizza(pizza: Pizza): Promise<boolean> {
     try {
       pizza.atualizadoEm = new Date();
+      const { id, ...updatedPizza } = pizza;
+
       const result = await this.db.collection("pizzas").updateOne(
-        { _id: new ObjectId(pizza.id) },
-        { $set: pizza }
+        { _id: new ObjectId(id) },
+        { $set: updatedPizza }
       );
+
       return result.matchedCount > 0;
     } catch (error) {
+      console.error(error);
       return false;
     }
   }
