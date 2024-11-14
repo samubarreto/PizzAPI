@@ -5,5 +5,6 @@ export interface IPedidoService {
   getPedidos(skip: number, pageSize: number, search: string): Promise<Pedido[]>;
   insertPedido(pizza: Pedido): Promise<boolean>;
   updatePedido(pizza: Pedido): Promise<boolean>;
-  deletePedido(id: number): Promise<boolean>;
+  deletePedido(id: string): Promise<boolean>;
+  count(): Promise<number>;
 }

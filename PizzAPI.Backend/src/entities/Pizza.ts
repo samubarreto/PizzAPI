@@ -4,7 +4,7 @@ import { TipoTamanhoPizza } from "../enums/TipoTamanhoPizza"
 
 export type Pizza = {
   id?: string,
-  nome: string,
+  sabor: string,
   descricao: string,
   ingredientes: Array<string>,
   preco: number,

@@ -3,51 +3,77 @@ import { IPizzaService } from '../interfaces/IPizzaService';
 import { Pizza } from '../entities/Pizza';
 
 export class PizzaController {
-  private pizzaService: IPizzaService;
+  constructor(private pizzaService: IPizzaService) { }
 
-  constructor(pizzaService: IPizzaService) {
-    this.pizzaService = pizzaService
-  }
+  count = async (req: Request, res: Response) => {
+    const countPizzas = await this.pizzaService.count();
+    return res.status(200).send(countPizzas.toString());
+  };
 
   getPizzaById = async (req: Request, res: Response) => {
     const pizzaId = req.params["id"];
     try {
-      return res.status(200).json(await this.pizzaService.getPizzaById(pizzaId));
+      const pizza = await this.pizzaService.getPizzaById(pizzaId);
+      if (pizza) {
+        return res.status(200).json(pizza);
+      }
+      return res.sendStatus(404);
     } catch (error) {
-      return res.status(500);
+      return res.sendStatus(500);
     }
   }
 
-  getPizzas = (req: Request, res: Response) => {
-    const skip = parseInt(req.params["skip"]) || 0;
-    const pageSize = parseInt(req.params["pageSize"]) || 10;
-    const search = req.params["search"] || "";
-    return res.status(200).json(this.pizzaService.getPizzas(skip, pageSize, search));
+  getPizzas = async (req: Request, res: Response) => {
+    const skip = parseInt(req.query["skip"] as string) || 0;
+    const pageSize = parseInt(req.query["pageSize"] as string) || 10;
+    const search = req.query["search"] as string || "";
+    try {
+      const pizzas = await this.pizzaService.getPizzas(skip, pageSize, search);
+      return res.status(200).json(pizzas);
+    } catch (error) {
+      return res.sendStatus(500);
+    }
   }
 
-  upsertPizza = (req: Request, res: Response) => {
+  upsertPizza = async (req: Request, res: Response) => {
     const pizza: Pizza = req.body;
-    if (!pizza || pizza == null) {
-      return res.status(400);
+    if (!pizza) {
+      return res.sendStatus(400);
     }
 
     if (!pizza.id) {
-      // const result = this.pizzaService.insertPizza(pizza);
-      // if (result)
-      return res.status(201);
-      // return res.status(422);
+      try {
+        const result = await this.pizzaService.insertPizza(pizza);
+        if (result) {
+          return res.sendStatus(201);
+        }
+        return res.sendStatus(422);
+      } catch (error) {
+        return res.sendStatus(500);
+      }
+    } else {
+      try {
+        const result = await this.pizzaService.updatePizza(pizza);
+        if (result) {
+          return res.sendStatus(200);
+        }
+        return res.sendStatus(404);
+      } catch (error) {
+        return res.sendStatus(500);
+      }
     }
-
-    // const result = this.pizzaService.updatePizza(pizza);
-    // if (result)
-    // return res.status(200);
-    // return res.status(422);
   }
 
-  deletePizza = (req: Request, res: Response) => {
-    const pizzaId = parseInt(req.params["id"]);
-    if (!pizzaId) return res.status(400)
-    // if (this.pizzaService.deletePizza(pizzaId)) return res.status(204)
-    // return res.status(404)
+  deletePizza = async (req: Request, res: Response) => {
+    const pizzaId = req.params["id"];
+    try {
+      const result = await this.pizzaService.deletePizza(pizzaId);
+      if (result) {
+        return res.sendStatus(204);
+      }
+      return res.sendStatus(404);
+    } catch (error) {
+      return res.sendStatus(500);
+    }
   }
 }

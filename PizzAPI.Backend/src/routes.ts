@@ -12,6 +12,7 @@ export function createRoutes(db: Db) {
   const pizzaController = new PizzaController(pizzaService);
 
   router.get('/pizza', pizzaController.getPizzas);
+  router.get('/pizzaCount', pizzaController.count);
   router.get('/pizza/:id', pizzaController.getPizzaById);
   router.post('/pizza', pizzaController.upsertPizza);
   router.put('/pizza', pizzaController.upsertPizza);

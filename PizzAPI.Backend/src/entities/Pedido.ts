@@ -5,8 +5,9 @@ import { Pizza } from "./Pizza"
 export type Pedido = {
   id?: string,
   pizzas: [
-    { pizzaId: number, quantidade: number }
+    { pizzaId: string, quantidade: number }
   ],
+  precoTotal: number,
   cliente: string,
   endereco: string,
   metodoPagamento: TipoPagamentoPedido

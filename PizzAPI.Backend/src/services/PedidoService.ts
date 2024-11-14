@@ -5,6 +5,15 @@ import { IPedidoService } from "../interfaces/IPedidoService";
 export class PedidoService implements IPedidoService {
   constructor(private db: Db) { }
 
+  async count(): Promise<number> {
+    try {
+      const countPedidos = await this.db.collection("pedidos").countDocuments();
+      return countPedidos;
+    } catch (error) {
+      return 0;
+    }
+  }
+
   async getPedidoById(id: string): Promise<Pedido | null> {
     try {
       const pedido = await this.db.collection("pedidos").findOne({ _id: new ObjectId(id) });
@@ -29,7 +38,7 @@ export class PedidoService implements IPedidoService {
     // to do
   }
 
-  async deletePedido(id: number): Promise<boolean> {
+  async deletePedido(id: string): Promise<boolean> {
     return true;
     // to do
   }

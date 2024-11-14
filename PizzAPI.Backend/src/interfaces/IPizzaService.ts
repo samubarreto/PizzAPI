@@ -6,4 +6,5 @@ export interface IPizzaService {
   insertPizza(pizza: Pizza): Promise<boolean>;
   updatePizza(pizza: Pizza): Promise<boolean>;
   deletePizza(id: string): Promise<boolean>;
+  count(): Promise<number>;
 }
