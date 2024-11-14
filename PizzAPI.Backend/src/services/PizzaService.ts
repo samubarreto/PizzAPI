@@ -7,8 +7,7 @@ export class PizzaService implements IPizzaService {
 
   async count(): Promise<number> {
     try {
-      const countPizzas = await this.db.collection("pizzas").countDocuments();
-      return countPizzas;
+      return await this.db.collection("pizzas").countDocuments();
     } catch (error) {
       return 0;
     }
@@ -41,7 +40,6 @@ export class PizzaService implements IPizzaService {
       .limit(pageSize)
       .toArray() as unknown as Pizza[];
   }
-
 
   async insertPizza(pizza: Pizza): Promise<boolean> {
     try {

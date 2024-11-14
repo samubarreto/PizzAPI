@@ -3,11 +3,7 @@ import { IPedidoService } from '../interfaces/IPedidoService';
 import { Pedido } from '../entities/Pedido';
 
 export class PedidoController {
-  private pedidoService: IPedidoService;
-
-  constructor(pedidoService: IPedidoService) {
-    this.pedidoService = pedidoService
-  }
+  constructor(private pedidoService: IPedidoService) { }
 
   count = async (req: Request, res: Response) => {
     const countPedidos = await this.pedidoService.count();
@@ -17,42 +13,67 @@ export class PedidoController {
   getPedidoById = async (req: Request, res: Response) => {
     const pedidoId = req.params["id"];
     try {
-      return res.status(200).json(await this.pedidoService.getPedidoById(pedidoId));
+      const pedido = await this.pedidoService.getPedidoById(pedidoId);
+      if (pedido) {
+        return res.status(200).json(pedido);
+      }
+      return res.sendStatus(404);
     } catch (error) {
-      return res.status(500);
+      return res.sendStatus(500);
     }
   }
 
-  getPedidos = (req: Request, res: Response) => {
-    const skip = parseInt(req.params["skip"]) || 0;
-    const pageSize = parseInt(req.params["pageSize"]) || 10;
-    const search = req.params["search"] || "";
-    return res.status(200).json(this.pedidoService.getPedidos(skip, pageSize, search));
+  getPedidos = async (req: Request, res: Response) => {
+    const skip = parseInt(req.query["skip"] as string) || 0;
+    const pageSize = parseInt(req.query["pageSize"] as string) || 10;
+    const search = req.query["search"] as string || "";
+    try {
+      const pedidos = await this.pedidoService.getPedidos(skip, pageSize, search);
+      return res.status(200).json(pedidos);
+    } catch (error) {
+      return res.sendStatus(500);
+    }
   }
 
-  upsertPedido = (req: Request, res: Response) => {
+  upsertPedido = async (req: Request, res: Response) => {
     const pedido: Pedido = req.body;
-    if (!pedido || pedido == null) {
-      return res.status(400);
+    if (!pedido) {
+      return res.sendStatus(400);
     }
 
     if (!pedido.id) {
-      const result = this.pedidoService.insertPedido(pedido);
-      // if (result)
-      return res.status(201);
-      // return res.status(422);
+      try {
+        const result = await this.pedidoService.insertPedido(pedido);
+        if (result) {
+          return res.sendStatus(201);
+        }
+        return res.sendStatus(422);
+      } catch (error) {
+        return res.sendStatus(500);
+      }
+    } else {
+      try {
+        const result = await this.pedidoService.updatePedido(pedido);
+        if (result) {
+          return res.sendStatus(200);
+        }
+        return res.sendStatus(404);
+      } catch (error) {
+        return res.sendStatus(500);
+      }
     }
-
-    const result = this.pedidoService.updatePedido(pedido);
-    // if (result)
-    return res.status(200);
-    // return res.status(422);
   }
 
-  deletePedido = (req: Request, res: Response) => {
-    // const pedidoId = parseInt(req.params["id"]);
-    // if (!pedidoId) return res.status(400)
-    // if (this.pedidoService.deletePedido(pedidoId)) return res.status(204)
-    return res.status(404)
+  deletePedido = async (req: Request, res: Response) => {
+    const pedidoId = req.params["id"];
+    try {
+      const result = await this.pedidoService.deletePedido(pedidoId);
+      if (result) {
+        return res.sendStatus(204);
+      }
+      return res.sendStatus(404);
+    } catch (error) {
+      return res.sendStatus(500);
+    }
   }
 }
