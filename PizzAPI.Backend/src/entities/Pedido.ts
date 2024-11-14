@@ -5,7 +5,7 @@ import { Pizza } from "./Pizza"
 export type Pedido = {
   id?: number,
   pizzas: [
-    { pizza: Pizza, quantidade: number }
+    { pizzaId: number, quantidade: number }
   ],
   cliente: string,
   endereco: string,
