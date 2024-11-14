@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "98b27a84-e4ca-4264-8955-037a70bf5bde",
+		"_postman_id": "7e579d35-bbff-4598-bb36-a89562f9fdc5",
 		"name": "PizzAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "33153549"
+		"_exporter_id": "31337816"
 	},
 	"item": [
 		{
@@ -46,13 +46,30 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/pizza/673559d1f46929a6050cdaf7",
+							"raw": "{{baseUrl}}/pizza/6735f065d6a2bef50f7419e8",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"pizza",
-								"673559d1f46929a6050cdaf7"
+								"6735f065d6a2bef50f7419e8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Quantidade Pizzas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pizzaCount",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pizzaCount"
 							]
 						}
 					},
@@ -65,7 +82,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Pizza de Mussarela\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"ingredientes\": [\"Mussarela\", \"Molho de tomate\", \"Orégano\", \"Azeitonas\"],\r\n    \"preco\": 49.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true,\r\n    \"criadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"atualizadoEm\": \"2024-11-13T00:00:00Z\"\r\n}\r\n",
+							"raw": "{\r\n    \"sabor\": \"cogumelo\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"ingredientes\": [\"Mussarela\", \"Molho de tomate\", \"Orégano\", \"Azeitonas\"],\r\n    \"preco\": 69.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -91,7 +108,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Pizza de Mussarela\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"ingredientes\": [\"Mussarela\", \"Molho de tomate\", \"Orégano\", \"Azeitonas\"],\r\n    \"preco\": 49.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true,\r\n    \"criadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"atualizadoEm\": \"2024-11-13T00:00:00Z\"\r\n}\r\n",
+							"raw": "{\r\n    \"id\": \"6736082d48b945a692163d49\",\r\n    \"sabor\": \"cogumeloooooooooo2ooooo\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"ingredientes\": [\"Mussarela\", \"Molho de tomate\", \"Orégano\", \"Azeitonas\"],\r\n    \"preco\": 9.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -116,13 +133,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/pizza/1",
+							"raw": "{{baseUrl}}/pizza/6736062210336876d75f7d66",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"pizza",
-								"1"
+								"6736062210336876d75f7d66"
 							]
 						}
 					},
@@ -189,7 +206,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"pizzas\": [\r\n        { \"pizzaId\": 1, \"quantidade\": 2 },\r\n        { \"pizzaId\": 2, \"quantidade\": 1 }\r\n    ],\r\n    \"cliente\": \"João Silva\",\r\n    \"endereco\": \"Rua das Pizzas, 123, Bairro Central\",\r\n    \"metodoPagamento\": 0,\r\n    \"status\": 1,\r\n    \"criadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"atualizadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"entregueEm\": null,\r\n    \"observacoes\": \"Incluir talheres descartáveis\"\r\n}\r\n",
+							"raw": "{\r\n    \"pizzas\": [\r\n        { \"pizzaId\": 1, \"quantidade\": 2 },\r\n        { \"pizzaId\": 2, \"quantidade\": 1 }\r\n    ],\r\n    \"cliente\": \"João Silva\",\r\n    \"endereco\": \"Rua das Pizzas, 123, Bairro Central\",\r\n    \"metodoPagamento\": 0,\r\n    \"status\": 1,\r\n    \"observacoes\": \"Incluir talheres descartáveis\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
