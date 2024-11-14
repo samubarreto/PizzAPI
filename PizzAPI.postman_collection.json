@@ -1,11 +1,259 @@
 {
 	"info": {
-		"_postman_id": "b8762c71-6b85-408d-8c21-804fb07f936c",
+		"_postman_id": "98b27a84-e4ca-4264-8955-037a70bf5bde",
 		"name": "PizzAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31337816"
+		"_exporter_id": "33153549"
 	},
 	"item": [
+		{
+			"name": "Crud Pizzas",
+			"item": [
+				{
+					"name": "Pagination Pizzas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pizza?skip=0&pageSize=10&search=",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pizza"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pizza by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pizza/673559d1f46929a6050cdaf7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pizza",
+								"673559d1f46929a6050cdaf7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Pizza",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Pizza de Mussarela\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"ingredientes\": [\"Mussarela\", \"Molho de tomate\", \"Orégano\", \"Azeitonas\"],\r\n    \"preco\": 49.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true,\r\n    \"criadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"atualizadoEm\": \"2024-11-13T00:00:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pizza",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pizza"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pizza",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"Pizza de Mussarela\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"ingredientes\": [\"Mussarela\", \"Molho de tomate\", \"Orégano\", \"Azeitonas\"],\r\n    \"preco\": 49.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true,\r\n    \"criadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"atualizadoEm\": \"2024-11-13T00:00:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pizza",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pizza"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Pizza",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pizza/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pizza",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Crud Pedidos",
+			"item": [
+				{
+					"name": "Pagination Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pedido?skip=0&pageSize=10&search=",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedido"
+							],
+							"query": [
+								{
+									"key": "skip",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pedido by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pedido/xpto",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedido",
+								"xpto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Insert Pedido",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"pizzas\": [\r\n        { \"pizzaId\": 1, \"quantidade\": 2 },\r\n        { \"pizzaId\": 2, \"quantidade\": 1 }\r\n    ],\r\n    \"cliente\": \"João Silva\",\r\n    \"endereco\": \"Rua das Pizzas, 123, Bairro Central\",\r\n    \"metodoPagamento\": 0,\r\n    \"status\": 1,\r\n    \"criadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"atualizadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"entregueEm\": null,\r\n    \"observacoes\": \"Incluir talheres descartáveis\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedido",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Pedido",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"pizzas\": [\r\n        { \"pizzaId\": 1, \"quantidade\": 2 },\r\n        { \"pizzaId\": 2, \"quantidade\": 1 }\r\n    ],\r\n    \"cliente\": \"João Silva\",\r\n    \"endereco\": \"Rua das Pizzas, 123, Bairro Central\",\r\n    \"metodoPagamento\": 0,\r\n    \"status\": 1,\r\n    \"criadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"atualizadoEm\": \"2024-11-13T00:00:00Z\",\r\n    \"entregueEm\": null,\r\n    \"observacoes\": \"Incluir talheres descartáveis\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pedido",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedido"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Pedido",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pedido/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pedido",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
 		{
 			"name": "healthcheck",
 			"request": {
