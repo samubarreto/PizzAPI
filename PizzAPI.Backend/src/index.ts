@@ -1,21 +1,29 @@
-import express, { Request, Response } from 'express';
-import { router } from './routes';
+import { MongoClient, Db } from "mongodb";
+import express from 'express';
 import { configDotenv } from 'dotenv';
-// configurar mongodb
+import { createRoutes } from './routes';
 
 configDotenv();
-const server = express();
 
-server.use(express.json());
-server.use(router);
+const client = new MongoClient(process.env.MONGODB_URI!);
+let db: Db;
 
-server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
-  next();
-});
+async function connectMongo() {
+  try {
+    await client.connect();
+    db = client.db(process.env.MONGODB_DB_NAME);
+    console.log("Conectado ao MongoDB");
 
-server.get('/', (req: Request, res: Response) => {
-  return res.status(200).json({ healthcheck: "ok" });
-})
+    const server = express();
+    server.use(express.json());
+    server.use(createRoutes(db));
 
-server.listen(process.env.BACKENDPORT, () => console.log(`PizzAPI Backend rodando em: http://127.0.0.1:${process.env.BACKENDPORT}/`));
+    server.listen(process.env.BACKENDPORT, () => {
+      console.log(`PizzAPI Backend rodando em: http://127.0.0.1:${process.env.BACKENDPORT}/`);
+    });
+  } catch (error) {
+    console.error("Erro ao conectar ao MongoDB:", error);
+  }
+}
+
+connectMongo();

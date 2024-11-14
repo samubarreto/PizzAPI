@@ -9,17 +9,20 @@ export class PizzaController {
     this.pizzaService = pizzaService
   }
 
+  getPizzaById = async (req: Request, res: Response) => {
+    const pizzaId = req.params["id"];
+    try {
+      return res.status(200).json(await this.pizzaService.getPizzaById(pizzaId));
+    } catch (error) {
+      return res.status(500);
+    }
+  }
+
   getPizzas = (req: Request, res: Response) => {
     const skip = parseInt(req.params["skip"]) || 0;
     const pageSize = parseInt(req.params["pageSize"]) || 10;
     const search = req.params["search"] || "";
     return res.status(200).json(this.pizzaService.getPizzas(skip, pageSize, search));
-  }
-
-  getPizzaById = (req: Request, res: Response) => {
-    const pizzaId = parseInt(req.params["id"]);
-    if (!pizzaId) return res.status(400)
-    return res.status(200).json(this.pizzaService.getPizzaById(pizzaId));
   }
 
   upsertPizza = (req: Request, res: Response) => {
@@ -29,22 +32,22 @@ export class PizzaController {
     }
 
     if (!pizza.id) {
-      const result = this.pizzaService.insertPizza(pizza);
-      if (result)
-        return res.status(201);
-      return res.status(422);
+      // const result = this.pizzaService.insertPizza(pizza);
+      // if (result)
+      return res.status(201);
+      // return res.status(422);
     }
 
-    const result = this.pizzaService.updatePizza(pizza);
-    if (result)
-      return res.status(200);
-    return res.status(422);
+    // const result = this.pizzaService.updatePizza(pizza);
+    // if (result)
+    // return res.status(200);
+    // return res.status(422);
   }
 
   deletePizza = (req: Request, res: Response) => {
     const pizzaId = parseInt(req.params["id"]);
     if (!pizzaId) return res.status(400)
-    if (this.pizzaService.deletePizza(pizzaId)) return res.status(204)
-    return res.status(404)
+    // if (this.pizzaService.deletePizza(pizzaId)) return res.status(204)
+    // return res.status(404)
   }
 }

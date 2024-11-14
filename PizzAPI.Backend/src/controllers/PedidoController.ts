@@ -9,17 +9,20 @@ export class PedidoController {
     this.pedidoService = pedidoService
   }
 
+  getPedidoById = async (req: Request, res: Response) => {
+    const pedidoId = req.params["id"];
+    try {
+      return res.status(200).json(await this.pedidoService.getPedidoById(pedidoId));
+    } catch (error) {
+      return res.status(500);
+    }
+  }
+
   getPedidos = (req: Request, res: Response) => {
     const skip = parseInt(req.params["skip"]) || 0;
     const pageSize = parseInt(req.params["pageSize"]) || 10;
     const search = req.params["search"] || "";
     return res.status(200).json(this.pedidoService.getPedidos(skip, pageSize, search));
-  }
-
-  getPedidoById = (req: Request, res: Response) => {
-    const pedidoId = parseInt(req.params["id"]);
-    if (!pedidoId) return res.status(400)
-    return res.status(200).json(this.pedidoService.getPedidoById(pedidoId));
   }
 
   upsertPedido = (req: Request, res: Response) => {
@@ -30,21 +33,21 @@ export class PedidoController {
 
     if (!pedido.id) {
       const result = this.pedidoService.insertPedido(pedido);
-      if (result)
-        return res.status(201);
-      return res.status(422);
+      // if (result)
+      return res.status(201);
+      // return res.status(422);
     }
 
     const result = this.pedidoService.updatePedido(pedido);
-    if (result)
-      return res.status(200);
-    return res.status(422);
+    // if (result)
+    return res.status(200);
+    // return res.status(422);
   }
 
   deletePedido = (req: Request, res: Response) => {
-    const pedidoId = parseInt(req.params["id"]);
-    if (!pedidoId) return res.status(400)
-    if (this.pedidoService.deletePedido(pedidoId)) return res.status(204)
+    // const pedidoId = parseInt(req.params["id"]);
+    // if (!pedidoId) return res.status(400)
+    // if (this.pedidoService.deletePedido(pedidoId)) return res.status(204)
     return res.status(404)
   }
 }

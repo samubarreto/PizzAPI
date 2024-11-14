@@ -1,29 +1,35 @@
+import { Db, ObjectId } from "mongodb";
 import { Pizza } from "../entities/Pizza";
 import { IPizzaService } from "../interfaces/IPizzaService";
-// implementar mongodb
 
 export class PizzaService implements IPizzaService {
-  getPizzaById = (id: number): Pizza => {
-    return {} as Pizza;
-    // to do
+  constructor(private db: Db) { }
+
+  async getPizzaById(id: string): Promise<Pizza | null> {
+    try {
+      const pizza = await this.db.collection("pizzas").findOne({ _id: new ObjectId(id) });
+      return pizza as Pizza | null;
+    } catch (error) {
+      return null;
+    }
   }
 
-  getPizzas = (skip: number, pageSize: number, search: string): Pizza[] => {
+  async getPizzas(skip: number, pageSize: number, search: string): Promise<Pizza[]> {
     return [{}] as Pizza[];
     // to do
   }
 
-  insertPizza(pizza: Pizza): boolean {
+  async insertPizza(pizza: Pizza): Promise<boolean> {
     return true;
     // to do
   }
 
-  updatePizza(pizza: Pizza): boolean {
+  async updatePizza(pizza: Pizza): Promise<boolean> {
     return true;
     // to do
   }
 
-  deletePizza = (id: number): boolean => {
+  async deletePizza(id: string): Promise<boolean> {
     return true;
     // to do
   }

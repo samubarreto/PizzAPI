@@ -1,29 +1,35 @@
+import { Db, ObjectId } from "mongodb";
 import { Pedido } from "../entities/Pedido";
 import { IPedidoService } from "../interfaces/IPedidoService";
-// implementar mongodb
 
 export class PedidoService implements IPedidoService {
-  getPedidoById = (id: number): Pedido => {
-    return {} as Pedido;
-    // to do
+  constructor(private db: Db) { }
+
+  async getPedidoById(id: string): Promise<Pedido | null> {
+    try {
+      const pedido = await this.db.collection("pedidos").findOne({ _id: new ObjectId(id) });
+      return pedido as Pedido | null;
+    } catch (error) {
+      return null;
+    }
   }
 
-  getPedidos = (skip: number, pageSize: number, search: string): Pedido[] => {
+  async getPedidos(skip: number, pageSize: number, search: string): Promise<Pedido[]> {
     return [{}] as Pedido[];
     // to do
   }
 
-  insertPedido(pedido: Pedido): boolean {
+  async insertPedido(pedido: Pedido): Promise<boolean> {
     return true;
     // to do
   }
 
-  updatePedido(pedido: Pedido): boolean {
+  async updatePedido(pedido: Pedido): Promise<boolean> {
     return true;
     // to do
   }
 
-  deletePedido = (id: number): boolean => {
+  async deletePedido(id: number): Promise<boolean> {
     return true;
     // to do
   }
