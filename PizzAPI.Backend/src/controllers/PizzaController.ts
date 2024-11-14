@@ -10,35 +10,32 @@ export class PizzaController {
   }
 
   getPizzas = (req: Request, res: Response) => {
-    const skip: number = parseInt(req.params["skip"]) || 0;
-    const pageSize: number = parseInt(req.params["pageSize"]) || 10;
-    const search: string = req.params["search"]
-
+    const skip = parseInt(req.params["skip"]) || 0;
+    const pageSize = parseInt(req.params["pageSize"]) || 10;
+    const search = req.params["search"] || "";
     return res.status(200).json(this.pizzaService.getPizzas(skip, pageSize, search));
   }
 
   getPizzaById = (req: Request, res: Response) => {
     const pizzaId = parseInt(req.params["id"]);
     if (!pizzaId) return res.status(400)
-
-    const result = this.pizzaService.getPizzaById(pizzaId);
-    if (result == null) return res.status(404);
-    return res.status(200).json(result);
+    return res.status(200).json(this.pizzaService.getPizzaById(pizzaId));
   }
 
-  insertPizza = (req: Request, res: Response) => {
+  upsertPizza = (req: Request, res: Response) => {
     const pizza: Pizza = req.body;
-    const result = this.pizzaService.insertPizza(pizza);
+    if (!pizza || pizza == null) {
+      return res.status(400);
+    }
 
-    if (result)
-      return res.status(201);
-    return res.status(422);
-  }
+    if (!pizza.id) {
+      const result = this.pizzaService.insertPizza(pizza);
+      if (result)
+        return res.status(201);
+      return res.status(422);
+    }
 
-  updatePizza = (req: Request, res: Response) => {
-    const pizza: Pizza = req.body;
     const result = this.pizzaService.updatePizza(pizza);
-
     if (result)
       return res.status(200);
     return res.status(422);
