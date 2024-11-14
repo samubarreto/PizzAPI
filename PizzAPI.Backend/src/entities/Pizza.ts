@@ -3,7 +3,7 @@ import { TipoRecheioBorda } from "../enums/TipoRecheioBorda"
 import { TipoTamanhoPizza } from "../enums/TipoTamanhoPizza"
 
 export type Pizza = {
-  id: number,
+  id?: number,
   nome: string,
   descricao: string,
   ingredientes: Array<string>,

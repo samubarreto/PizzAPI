@@ -3,7 +3,7 @@ import { TipoStatusPedido } from "../enums/TipoStatusPedido"
 import { Pizza } from "./Pizza"
 
 export type Pedido = {
-  id: number,
+  id?: number,
   pizzas: [
     { pizza: Pizza, quantidade: number }
   ],
