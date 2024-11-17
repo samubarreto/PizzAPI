@@ -7,7 +7,7 @@ export class PizzaController {
 
   count = async (req: Request, res: Response) => {
     const countPizzas = await this.pizzaService.count();
-    return res.status(200).send(countPizzas.toString());
+    return res.status(200).json({ count: countPizzas });
   };
 
   getPizzaById = async (req: Request, res: Response) => {
@@ -41,7 +41,7 @@ export class PizzaController {
       return res.sendStatus(400);
     }
 
-    if (!pizza.id) {
+    if (!pizza._id) {
       try {
         const result = await this.pizzaService.insertPizza(pizza);
         if (result) {

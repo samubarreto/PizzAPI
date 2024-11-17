@@ -1,8 +1,8 @@
-import { TipoMassaPizza } from "../enums/TipoMassaPizza"
-import { TipoRecheioBorda } from "../enums/TipoRecheioBorda"
-import { TipoTamanhoPizza } from "../enums/TipoTamanhoPizza"
+import { TipoMassaPizza } from "./enums/TipoMassaPizza";
+import { TipoRecheioBorda } from "./enums/TipoRecheioBorda";
+import { TipoTamanhoPizza } from "./enums/TipoTamanhoPizza";
 
-export type Pizza = {
+export interface Pizza {
   _id?: string,
   sabor: string,
   descricao: string,

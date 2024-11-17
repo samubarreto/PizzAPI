@@ -11,22 +11,22 @@ export function createRoutes(db: Db) {
   const pizzaService = new PizzaService(db);
   const pizzaController = new PizzaController(pizzaService);
 
-  router.get('/pizza', pizzaController.getPizzas);
-  router.get('/pizzaCount', pizzaController.count);
-  router.get('/pizza/:id', pizzaController.getPizzaById);
-  router.post('/pizza', pizzaController.upsertPizza);
-  router.put('/pizza', pizzaController.upsertPizza);
-  router.delete('/pizza/:id', pizzaController.deletePizza);
+  router.get('/api/pizza', pizzaController.getPizzas);
+  router.get('/api/pizzaCount', pizzaController.count);
+  router.get('/api/pizza/:id', pizzaController.getPizzaById);
+  router.post('/api/pizza', pizzaController.upsertPizza);
+  router.put('/api/pizza', pizzaController.upsertPizza);
+  router.delete('/api/pizza/:id', pizzaController.deletePizza);
 
   const pedidoService = new PedidoService(db);
   const pedidoController = new PedidoController(pedidoService);
 
-  router.get('/pedido', pedidoController.getPedidos);
-  router.get('/pedidoCounte', pedidoController.count);
-  router.get('/pedido/:id', pedidoController.getPedidoById);
-  router.post('/pedido', pedidoController.upsertPedido);
-  router.put('/pedido', pedidoController.upsertPedido);
-  router.delete('/pedido/:id', pedidoController.deletePedido);
+  router.get('/api/pedido', pedidoController.getPedidos);
+  router.get('/api/pedidoCount', pedidoController.count);
+  router.get('/api/pedido/:id', pedidoController.getPedidoById);
+  router.post('/api/pedido', pedidoController.upsertPedido);
+  router.put('/api/pedido', pedidoController.upsertPedido);
+  router.delete('/api/pedido/:id', pedidoController.deletePedido);
 
   return router;
 }

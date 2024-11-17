@@ -41,7 +41,7 @@ export class PedidoController {
       return res.sendStatus(400);
     }
 
-    if (!pedido.id) {
+    if (!pedido._id) {
       try {
         const result = await this.pedidoService.insertPedido(pedido);
         if (result) {

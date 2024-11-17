@@ -45,7 +45,9 @@ export class PizzaService implements IPizzaService {
     try {
       pizza.criadoEm = new Date();
       pizza.atualizadoEm = new Date();
-      const result = await this.db.collection("pizzas").insertOne(pizza);
+      const { _id, ...pizzaSemId } = pizza;
+
+      const result = await this.db.collection("pizzas").insertOne(pizzaSemId);
       return result.insertedId != null;
     } catch (error) {
       return false;
@@ -55,10 +57,10 @@ export class PizzaService implements IPizzaService {
   async updatePizza(pizza: Pizza): Promise<boolean> {
     try {
       pizza.atualizadoEm = new Date();
-      const { id, ...updatedPizza } = pizza;
+      const { _id, ...updatedPizza } = pizza;
 
       const result = await this.db.collection("pizzas").updateOne(
-        { _id: new ObjectId(id) },
+        { _id: new ObjectId(_id) },
         { $set: updatedPizza }
       );
 
@@ -69,9 +71,9 @@ export class PizzaService implements IPizzaService {
     }
   }
 
-  async deletePizza(id: string): Promise<boolean> {
+  async deletePizza(_id: string): Promise<boolean> {
     try {
-      const result = await this.db.collection("pizzas").deleteOne({ _id: new ObjectId(id) });
+      const result = await this.db.collection("pizzas").deleteOne({ _id: new ObjectId(_id) });
       return result.deletedCount > 0;
     } catch (error) {
       return false;

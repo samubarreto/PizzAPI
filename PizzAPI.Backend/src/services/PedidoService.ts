@@ -61,8 +61,9 @@ export class PedidoService implements IPedidoService {
       }, 0);
 
       pedido.precoTotal = precoTotal;
+      const { _id, ...pedidoSemId } = pedido;
 
-      const result = await this.db.collection("pedidos").insertOne(pedido);
+      const result = await this.db.collection("pedidos").insertOne(pedidoSemId);
       return result.insertedId != null;
     } catch (error) {
       return false;
@@ -72,7 +73,7 @@ export class PedidoService implements IPedidoService {
   async updatePedido(pedido: Pedido): Promise<boolean> {
     try {
       pedido.atualizadoEm = new Date();
-      const { id, ...updatedPedido } = pedido;
+      const { _id, ...updatedPedido } = pedido;
 
       const pizzasDoPedido = await this.db.collection("pizzas")
         .find({ _id: { $in: pedido.pizzas.map(pizza => new ObjectId(pizza.pizzaId)) } })
@@ -91,7 +92,7 @@ export class PedidoService implements IPedidoService {
       updatedPedido.precoTotal = precoTotal;
 
       const result = await this.db.collection("pedidos").updateOne(
-        { _id: new ObjectId(id) },
+        { _id: new ObjectId(_id) },
         { $set: updatedPedido }
       );
 

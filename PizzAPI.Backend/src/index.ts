@@ -1,11 +1,12 @@
 import { MongoClient, Db } from "mongodb";
 import express from 'express';
+import cors from "cors";
 import { configDotenv } from 'dotenv';
 import { createRoutes } from './routes';
 
 configDotenv();
 
-const client = new MongoClient(process.env.MONGODB_URI!);
+const client = new MongoClient(process.env.MONGODB_CONNSTRING!);
 let db: Db;
 
 async function connectMongo() {
@@ -15,6 +16,7 @@ async function connectMongo() {
     console.log("Conectado ao MongoDB");
 
     const server = express();
+    server.use(cors());
     server.use(express.json());
     server.use(createRoutes(db));
 
