@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "7e579d35-bbff-4598-bb36-a89562f9fdc5",
+		"_postman_id": "f7df0e17-4d7b-4dba-ac6d-b31876fe641b",
 		"name": "PizzAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31337816"
+		"_exporter_id": "33153549"
 	},
 	"item": [
 		{
@@ -15,11 +15,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/pizza?skip=0&pageSize=10&search=",
+							"raw": "{{baseUrl}}/api/pizza?skip=0&pageSize=10&search=",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pizza"
 							],
 							"query": [
@@ -46,11 +47,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/pizza/6735f065d6a2bef50f7419e8",
+							"raw": "{{baseUrl}}/api/pizza/6735f065d6a2bef50f7419e8",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pizza",
 								"6735f065d6a2bef50f7419e8"
 							]
@@ -64,11 +66,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/pizzaCount",
+							"raw": "{{baseUrl}}/api/pizzaCount",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pizzaCount"
 							]
 						}
@@ -82,7 +85,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"sabor\": \"cogumelo\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"ingredientes\": [\"Mussarela\", \"Molho de tomate\", \"Orégano\", \"Azeitonas\"],\r\n    \"preco\": 69.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true\r\n}\r\n",
+							"raw": "{\r\n    \"sabor\": \"cogumelo\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"ingredientes\": [\"Mussarela\", \"Molho de tomate\", \"Orégano\", \"Azeitonas\"],\r\n    \"preco\": 69.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true,\r\n    \"urlImagem\": \"https://images.unsplash.com/photo-1576458088443-04a19bb13da6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -90,11 +93,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pizza",
+							"raw": "{{baseUrl}}/api/pizza",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pizza"
 							]
 						}
@@ -116,11 +120,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pizza",
+							"raw": "{{baseUrl}}/api/pizza",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pizza"
 							]
 						}
@@ -133,13 +138,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/pizza/6736062210336876d75f7d66",
+							"raw": "{{baseUrl}}/api/pizza/673a12d8ad29400d86c13eef",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pizza",
-								"6736062210336876d75f7d66"
+								"673a12d8ad29400d86c13eef"
 							]
 						}
 					},
@@ -156,11 +162,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/pedido?skip=0&pageSize=10&search=",
+							"raw": "{{baseUrl}}/api/pedido?skip=0&pageSize=10&search=",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pedido"
 							],
 							"query": [
@@ -187,13 +194,32 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/pedido/xpto",
+							"raw": "{{baseUrl}}/api/pedido/xpto",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pedido",
 								"xpto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Quantidade Pedidos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/pedidoCount",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"pedidoCount"
 							]
 						}
 					},
@@ -214,11 +240,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pedido",
+							"raw": "{{baseUrl}}/api/pedido",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pedido"
 							]
 						}
@@ -240,11 +267,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/pedido",
+							"raw": "{{baseUrl}}/api/pedido",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pedido"
 							]
 						}
@@ -257,11 +285,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/pedido/67360bc9524e825f3a734cf8",
+							"raw": "{{baseUrl}}/api/pedido/67360bc9524e825f3a734cf8",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
+								"api",
 								"pedido",
 								"67360bc9524e825f3a734cf8"
 							]
@@ -270,20 +299,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "healthcheck",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{baseUrl}}",
-					"host": [
-						"{{baseUrl}}"
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"event": [
