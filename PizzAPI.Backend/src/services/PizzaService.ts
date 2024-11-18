@@ -28,7 +28,6 @@ export class PizzaService implements IPizzaService {
         $or: [
           { sabor: { $regex: search, $options: "i" } },
           { descricao: { $regex: search, $options: "i" } },
-          { ingredientes: { $regex: search, $options: "i" } },
           { preco: isNaN(Number(search)) ? null : Number(search) }
         ].filter(condition => condition !== null)
       }

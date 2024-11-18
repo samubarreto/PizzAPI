@@ -6,7 +6,6 @@ export type Pizza = {
   _id?: string,
   sabor: string,
   descricao: string,
-  ingredientes: Array<string>,
   preco: number,
   peso: number,
   recheioBorda?: TipoRecheioBorda,

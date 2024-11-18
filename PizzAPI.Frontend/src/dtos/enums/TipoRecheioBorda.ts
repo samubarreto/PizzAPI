@@ -1,6 +1,6 @@
 export enum TipoRecheioBorda {
-  'Cheddar' = 0,
-  'Catupiry' = 1,
-  'Calabresa' = 2,
-  'Bacon' = 3
+  'Cheddar' = 1,
+  'Catupiry' = 2,
+  'Calabresa' = 3,
+  'Bacon' = 4
 }

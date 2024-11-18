@@ -4,7 +4,7 @@ import { getCountPizzas, getPizzas } from "../../services/pizzaService";
 import { useNavigation } from "simple-react-routing";
 import { NovaPizza, PizzasContainer, UpperContainer } from "./styles";
 import Loader from "../../components/Loader";
-import { PizzaDeleteForm, PizzaUpsertForm } from "./PizzaForms";
+import { PizzaUpsertForm } from "./PizzaForms";
 import PizzaCard from "./PizzaCard";
 import Pagination from "../../components/Pagination";
 import SearchBar from "../../components/SearchBar";
@@ -12,8 +12,7 @@ import { PedidosNavigator } from "../../components/Navigator";
 
 export default function Pizzas() {
   const [pizzas, setPizzas] = useState<Pizza[] | undefined>(undefined);
-  const [pizzaUpsert, setPizzaUpsert] = useState<Pizza | undefined>(undefined);
-  const [pizzaDelete, setPizzaDelete] = useState<Pizza | undefined>(undefined);
+  const [pizzaInsert, setPizzaInsert] = useState<Pizza | undefined>(undefined);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [search, setSearch] = useState<string>(""); 
@@ -44,18 +43,17 @@ export default function Pizzas() {
   useEffect(() => {
     fetchPizzas();
   }, [page, search]);
-1
+
   return (
     <>
       { loading && <Loader />}
       
-      { pizzaUpsert && <PizzaUpsertForm pizza={pizzaUpsert} onClose={() => setPizzaUpsert(undefined)}/> }
-      { pizzaDelete && <PizzaDeleteForm pizza={pizzaDelete} onClose={() => setPizzaDelete(undefined)} />}
+      { pizzaInsert && <PizzaUpsertForm pizza={pizzaInsert} onClose={() => setPizzaInsert(undefined)}/> }
       
       <UpperContainer>
         <PedidosNavigator/>
         <SearchBar onChange={(e) => setSearch(e.target.value)} />
-        <NovaPizza onClick={() => setPizzaUpsert({} as Pizza)}>Nova Pizza ➕</NovaPizza>
+        <NovaPizza onClick={() => setPizzaInsert({} as Pizza)}>Nova Pizza ➕</NovaPizza>
       </UpperContainer>
       
       { pizzas && <PizzasContainer>{ pizzas?.map((pizza) => (<PizzaCard key={pizza._id} pizza={pizza} />)) }</PizzasContainer>}

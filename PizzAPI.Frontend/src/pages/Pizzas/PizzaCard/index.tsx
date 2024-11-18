@@ -1,32 +1,53 @@
+import { useState } from "react";
 import { TipoMassaPizza } from "../../../dtos/enums/TipoMassaPizza";
 import { TipoRecheioBorda } from "../../../dtos/enums/TipoRecheioBorda";
 import { TipoTamanhoPizza } from "../../../dtos/enums/TipoTamanhoPizza";
 import { Pizza } from "../../../dtos/Pizza";
-import { PizzaCardContainer, FlexRow, Ingrediente, Ingredientes, PizzaDescricao, PizzaDisponivel, PizzaIndisponivel, PizzaNome, PizzaPreco, PizzaSpan, PizzaImagem,  } from "./styles";
+import { 
+  PizzaCardContainer, 
+  FlexRow, 
+  PizzaDescricao, 
+  PizzaDisponivel, 
+  PizzaIndisponivel, 
+  PizzaNome, 
+  PizzaPreco, 
+  PizzaSpan, 
+  PizzaImagem, 
+  BottomContainer,
+  BotaoPizza
+} from "./styles";
+import { PizzaDeleteForm, PizzaUpsertForm } from "../PizzaForms";
 
 interface PizzaCardProps {
   pizza: Pizza;
 }
 
 export default function PizzaCard({ pizza }: PizzaCardProps) {
+  const [pizzaDelete, setPizzaDelete] = useState<Pizza | undefined>(undefined);
+  const [pizzaEdit, setPizzaEdit] = useState<Pizza | undefined>(undefined);
+
   return (
-    <PizzaCardContainer>
-      <PizzaImagem src={pizza.urlImagem}/>
-      <PizzaNome>Pizza de {pizza.sabor}</PizzaNome>
-      <PizzaDescricao>{pizza.descricao}</PizzaDescricao>
-      <FlexRow>
-        <PizzaSpan>{TipoTamanhoPizza[pizza.tamanho]}</PizzaSpan>
-        <PizzaSpan>{TipoMassaPizza[pizza.massa]}</PizzaSpan>
-        { pizza.recheioBorda && <PizzaSpan>{TipoRecheioBorda[pizza.recheioBorda]}</PizzaSpan> }
-        { pizza.disponivel ? <PizzaDisponivel>DISP</PizzaDisponivel> : <PizzaIndisponivel>INDISP</PizzaIndisponivel>}
-      </FlexRow>
-      <PizzaDescricao>Ingredientes:</PizzaDescricao>
-      <Ingredientes>
-        <Ingrediente>alface</Ingrediente>
-        <Ingrediente>tomate</Ingrediente>
-        <Ingrediente>cebola</Ingrediente>
-      </Ingredientes>
-      <PizzaPreco>R$ {pizza.preco.toFixed(2)}</PizzaPreco>
-    </PizzaCardContainer>
+    <>
+      { pizzaEdit && <PizzaUpsertForm pizza={pizzaEdit} onClose={() => setPizzaEdit(undefined)}/> }
+      { pizzaDelete && <PizzaDeleteForm pizza={pizzaDelete} onClose={() => setPizzaDelete(undefined)}/>}
+      <PizzaCardContainer>
+        <PizzaImagem src={pizza.urlImagem} />
+        <PizzaNome>Pizza de {pizza.sabor}</PizzaNome>
+        <PizzaDescricao>{pizza.descricao}</PizzaDescricao>
+        <FlexRow>
+          <PizzaSpan>{TipoTamanhoPizza[pizza.tamanho]}</PizzaSpan>
+          <PizzaSpan>{TipoMassaPizza[pizza.massa]}</PizzaSpan>
+          {pizza.recheioBorda != undefined && <PizzaSpan>{TipoRecheioBorda[pizza.recheioBorda + 1]}</PizzaSpan>}
+          {pizza.disponivel ? <PizzaDisponivel>DISP</PizzaDisponivel> : <PizzaIndisponivel>INDISP</PizzaIndisponivel>}
+        </FlexRow>
+        <BottomContainer>
+          <div>
+            <BotaoPizza onClick={() => setPizzaEdit(pizza)}>✏️Editar</BotaoPizza>
+            <BotaoPizza onClick={() => setPizzaDelete(pizza)}>🗑️Deletar</BotaoPizza>
+          </div>
+          <PizzaPreco>R$ {pizza.preco.toFixed(2)}</PizzaPreco>
+        </BottomContainer>
+      </PizzaCardContainer>
+    </>
   );
 }

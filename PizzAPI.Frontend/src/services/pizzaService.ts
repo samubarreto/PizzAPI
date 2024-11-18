@@ -29,16 +29,14 @@ export async function deletarPizza(idPizza: string) {
   return response.status;
 }
 
-// export function postPutCliente(cliente) {
-
-//   var request = {
-//     method: cliente.id ? "PUT" : "POST",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify(cliente)
-//   }
-
-//   var response = fetch(URL_API + "/api/clientes", request)
-//   return response;
-// }
+export async function salvarPizza(pizza: Partial<Pizza>) {
+  const request = {
+    method: pizza._id ? "PUT" : "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pizza),
+  };
+  const response = await fetch(`${API_URL}/api/pizza`, request);
+  return response.json();
+}
