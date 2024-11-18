@@ -13,6 +13,7 @@ export const FooterContainer = styled.div`
 
 export const FooterAnchor = styled.a`
   all: unset;
+  color: #fff;
   &:hover {
     cursor: pointer;
   }

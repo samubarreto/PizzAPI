@@ -1,4 +1,4 @@
-import { SearchBarContainer, SearchBarInput } from "./styles";
+import { SearchBarInput } from "./styles";
 
 interface SearchBarProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -6,11 +6,6 @@ interface SearchBarProps {
 
 export default function SearchBar({ onChange }: SearchBarProps) {
   return (
-    <SearchBarContainer>
-      <SearchBarInput
-        placeholder="Busque sua Pizza favorita pelo sabor, descrição ou ingredientes🔍"
-        onChange={onChange}
-      />
-    </SearchBarContainer>
+    <SearchBarInput placeholder="🔍 Busque sua Pizza favorita pelo sabor, descrição ou ingredientes" onChange={onChange}/>
   );
 }

@@ -1,53 +1,32 @@
 import { Pizza } from "../../dtos/Pizza";
-import { Modal, ModalContainer } from "../../components/Modal/styles"
+import { FundoPreto } from "../../components/FundoPreto/styles"
+import { CancelForm, ConfirmForm, Form, FormTitle } from "./styles";
 
 interface ModalPizzaProps {
-  pizza: Pizza | null;
+  pizza: Partial<Pizza> | null;
   onClose: () => void;
 }
 
 export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
   return (
-    <ModalContainer>
-      <Modal>
-        <button onClick={onClose}>X</button>
-        {pizza ? (
-          <>
-            <h2>Detalhes da Pizza</h2>
-            <p>ID: {pizza._id}</p>
-            <p>Sabor: {pizza.sabor}</p>
-            <p>Descrição: {pizza.descricao}</p>
-            <p>Preço: {pizza.preco}</p>
-            <p>Tamanho: {pizza.tamanho}</p>
-            <p>Massa: {pizza.massa}</p>
-          </>
-        ) : (
-          <p>Nenhuma pizza selecionada</p>
-        )}
-      </Modal>
-    </ModalContainer>
+    <FundoPreto>
+      <Form>
+        <FormTitle>{pizza?._id ? "Editar Pizza" : "Inserir Pizza"}</FormTitle>
+        <ConfirmForm type="submit">Confirmar</ConfirmForm>
+        <CancelForm type="button" onClick={onClose}>Cancelar</CancelForm>
+      </Form>
+    </FundoPreto>
   );
 }
 
 export function PizzaDeleteForm({ pizza, onClose }: ModalPizzaProps) {
   return (
-    <ModalContainer>
-      <Modal>
-        <button onClick={onClose}>X</button>
-        {pizza ? (
-          <>
-            <h2>Detalhes da Pizza</h2>
-            <p>ID: {pizza._id}</p>
-            <p>Sabor: {pizza.sabor}</p>
-            <p>Descrição: {pizza.descricao}</p>
-            <p>Preço: {pizza.preco}</p>
-            <p>Tamanho: {pizza.tamanho}</p>
-            <p>Massa: {pizza.massa}</p>
-          </>
-        ) : (
-          <p>Nenhuma pizza selecionada</p>
-        )}
-      </Modal>
-    </ModalContainer>
+    <FundoPreto>
+      <Form>
+        <FormTitle>Excluir Pizza</FormTitle>
+        <ConfirmForm type="submit">Confirmar</ConfirmForm>
+        <CancelForm type="button" onClick={onClose}>Cancelar</CancelForm>
+      </Form>
+    </FundoPreto>
   );
 }

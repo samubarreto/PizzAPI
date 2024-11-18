@@ -16,15 +16,10 @@ export const HeaderContainer = styled.div`
 
 export const HeaderAnchor = styled.a`
   all: unset;
-  font-weight: 900;
-  font-size: 3rem;
+  color: #fff;
+  font-weight: bolder;
+  font-size: 2.5rem;
   &:hover {
     cursor: pointer;
   }
-`
-
-export const HeaderLinks = styled.div`
-  all: unset;
-  border: solid 2px #222222;
-  background-color: #6e6e6e
 `

@@ -2,7 +2,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: #222222;
-  color: #fff;
   font-family: monospace;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body {
+  background-color: #222222;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }

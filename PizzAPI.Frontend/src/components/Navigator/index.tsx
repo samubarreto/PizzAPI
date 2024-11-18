@@ -1,17 +1,9 @@
-import { NavigatorContainer, NavigatorItem } from "./styles";
+import { NavigatorItem } from "./styles";
 
 export function PedidosNavigator() {
-  return (
-    <NavigatorContainer>
-      <NavigatorItem to={"pedidos"}>Pedidos🛒</NavigatorItem>
-    </NavigatorContainer>
-  )
+  return <NavigatorItem to={"pedidos"}>Veja os Pedidos 🛒</NavigatorItem>
 }
 
 export function PizzasNavigator() {
-  return (
-    <NavigatorContainer>
-      <NavigatorItem to={"pizzas"}>Pizzas🍕</NavigatorItem>
-    </NavigatorContainer>
-  )
+  return <NavigatorItem to={"pizzas"}>Veja as Pizzas 🍕</NavigatorItem>
 }

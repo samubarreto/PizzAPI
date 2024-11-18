@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Pizza } from '../../dtos/Pizza'
 import { getCountPizzas, getPizzas } from "../../services/pizzaService";
 import { useNavigation } from "simple-react-routing";
-import { PizzasContainer } from "./styles";
+import { NovaPizza, PizzasContainer, UpperContainer } from "./styles";
 import Loader from "../../components/Loader";
 import { PizzaDeleteForm, PizzaUpsertForm } from "./PizzaForms";
 import PizzaCard from "./PizzaCard";
@@ -12,13 +12,13 @@ import { PedidosNavigator } from "../../components/Navigator";
 
 export default function Pizzas() {
   const [pizzas, setPizzas] = useState<Pizza[] | undefined>(undefined);
-  const [pizzaEdit, setPizzaEdit] = useState<Pizza | undefined>(undefined);
+  const [pizzaUpsert, setPizzaUpsert] = useState<Pizza | undefined>(undefined);
   const [pizzaDelete, setPizzaDelete] = useState<Pizza | undefined>(undefined);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [search, setSearch] = useState<string>(""); 
   const [loading, setLoading] = useState<boolean>(true); 
-  const pageSize = 10;
+  const pageSize = 5;
   const { navigateTo } = useNavigation();
 
   useEffect(() => {
@@ -48,10 +48,16 @@ export default function Pizzas() {
   return (
     <>
       { loading && <Loader />}
-      { pizzaEdit && <PizzaUpsertForm pizza={pizzaEdit} onClose={() => setPizzaEdit(undefined)}/> }
+      
+      { pizzaUpsert && <PizzaUpsertForm pizza={pizzaUpsert} onClose={() => setPizzaUpsert(undefined)}/> }
       { pizzaDelete && <PizzaDeleteForm pizza={pizzaDelete} onClose={() => setPizzaDelete(undefined)} />}
-      <PedidosNavigator/>
-      <SearchBar onChange={(e) => setSearch(e.target.value)} />
+      
+      <UpperContainer>
+        <PedidosNavigator/>
+        <SearchBar onChange={(e) => setSearch(e.target.value)} />
+        <NovaPizza onClick={() => setPizzaUpsert({} as Pizza)}>Nova Pizza ➕</NovaPizza>
+      </UpperContainer>
+      
       { pizzas && <PizzasContainer>{ pizzas?.map((pizza) => (<PizzaCard key={pizza._id} pizza={pizza} />)) }</PizzasContainer>}
       { pizzas && <Pagination currentPage={page} totalPages={totalPages} onChangePage={setPage} /> }
     </>
