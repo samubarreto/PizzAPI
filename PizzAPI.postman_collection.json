@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "f7df0e17-4d7b-4dba-ac6d-b31876fe641b",
+		"_postman_id": "7817a1d0-528c-4841-a91d-bc28ced4f1d2",
 		"name": "PizzAPI",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "33153549"
+		"_exporter_id": "31337816"
 	},
 	"item": [
 		{
@@ -85,7 +85,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"sabor\": \"cogumelo\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"ingredientes\": [\"Mussarela\", \"Molho de tomate\", \"Orégano\", \"Azeitonas\"],\r\n    \"preco\": 69.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true,\r\n    \"urlImagem\": \"https://images.unsplash.com/photo-1576458088443-04a19bb13da6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\r\n}\r\n",
+							"raw": "{\r\n    \"sabor\": \"cogumelo\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"preco\": 69.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 0,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true,\r\n    \"urlImagem\": \"https://images.unsplash.com/photo-1576458088443-04a19bb13da6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -112,7 +112,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"6736082d48b945a692163d49\",\r\n    \"sabor\": \"cogumeloooooooooo2ooooo\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"ingredientes\": [\"Mussarela\", \"Molho de tomate\", \"Orégano\", \"Azeitonas\"],\r\n    \"preco\": 9.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true\r\n}\r\n",
+							"raw": "{\r\n    \"id\": \"6736082d48b945a692163d49\",\r\n    \"sabor\": \"cogumeloooooooooo2ooooo\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"preco\": 9.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 1,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
