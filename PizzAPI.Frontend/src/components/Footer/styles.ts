@@ -9,6 +9,7 @@ export const FooterContainer = styled.div`
   font-weight: 900;
   text-align: center;
   padding: 8px 0;
+  z-index: -1;
 `
 
 export const FooterAnchor = styled.a`

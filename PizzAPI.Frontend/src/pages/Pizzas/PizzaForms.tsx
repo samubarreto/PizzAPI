@@ -9,7 +9,9 @@ import {
   FormInput, 
   FormSelect, 
   FormTextarea, 
-  FlexRowSpace
+  FlexRowSpace,
+  BottomRow,
+  MiddleRow
 } from "./styles";
 import { TipoMassaPizza } from "../../dtos/enums/TipoMassaPizza";
 import { TipoRecheioBorda } from "../../dtos/enums/TipoRecheioBorda";
@@ -23,6 +25,7 @@ interface ModalPizzaProps {
 
 export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
   const [formState, setFormState] = useState<Partial<Pizza>>(pizza || {});
+  const PIZZA_PLACEHOLDER = "https://img.freepik.com/fotos-gratis/natureza-morta-de-pratos-de-fast-food_23-2149187946.jpg?t=st=1732230116~exp=1732233716~hmac=abcde0a69cf23d7af43614b0b6a1de2e0dfbc09e872feb85805b57e076ac1803&w=1060";
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -48,7 +51,7 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
       tamanho: formState.tamanho ? parseInt(formState.tamanho.toString(), 10) : 0,
       massa: formState.massa ? parseFloat(formState.massa.toString()) : 0,
       disponivel: !!formState.disponivel,
-      urlImagem: formState.urlImagem || "https://thumbs.dreamstime.com/b/teste-padr%C3%A3o-sem-emenda-da-pizza-teste-padr%C3%A3o-da-pizza-do-vetor-89205691.jpg",
+      urlImagem: formState.urlImagem || PIZZA_PLACEHOLDER,
       atualizadoEm: new Date(),
     };
   
@@ -97,6 +100,7 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
             value={formState.urlImagem}
             onChange={handleChange}
           />
+          <img src={formState.urlImagem} onError={(e) => { const target = e.target as HTMLImageElement; target.src = PIZZA_PLACEHOLDER }}/>
         </FlexRowSpace>
 
         <FlexRowSpace>
@@ -164,7 +168,7 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
         </FlexRowSpace>
 
         <FlexRowSpace>
-          <label htmlFor="recheioBorda">Recheio da Borda:</label>
+          <label htmlFor="recheioBorda">Borda:</label>
           <FormSelect
             id="recheioBorda"
             name="recheioBorda"
@@ -181,7 +185,7 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
           </FormSelect>
         </FlexRowSpace>
 
-        <FlexRowSpace>
+        <FlexRowSpace style={{flexDirection:'row'}}>
           <label htmlFor="disponivel">Disponível:</label>
           <input
             id="disponivel"
@@ -192,10 +196,10 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
           />
         </FlexRowSpace>
 
-        <div>
-          <ConfirmForm type="submit">Confirmar</ConfirmForm>
+        <BottomRow>
           <CancelForm type="button" onClick={onClose}>Cancelar</CancelForm>
-        </div>
+          <ConfirmForm type="submit">Confirmar</ConfirmForm>
+        </BottomRow>
       </Form>
     </FundoPreto>
   );
@@ -211,13 +215,13 @@ export function PizzaDeleteForm({ pizza, onClose }: ModalPizzaProps) {
 
   return (
     <FundoPreto>
-      <Form onSubmit={(e) => { e.preventDefault(); handleDelete(); }}>
+      <Form onSubmit={(e) => { e.preventDefault(); handleDelete(); }} style={{width:'30dvw'}}>
         <FormTitle>Excluir Pizza</FormTitle>
-        <p>Tem certeza de que deseja excluir a pizza de {pizza?.sabor}?</p>
-        <div>
-          <ConfirmForm type="submit">Confirmar</ConfirmForm>
+        <MiddleRow>-Tem certeza de que deseja excluir a pizza de {pizza?.sabor}?</MiddleRow>
+        <BottomRow>
           <CancelForm type="button" onClick={onClose}>Cancelar</CancelForm>
-        </div>
+          <ConfirmForm type="submit">Confirmar</ConfirmForm>
+        </BottomRow>
       </Form>
     </FundoPreto>
   );

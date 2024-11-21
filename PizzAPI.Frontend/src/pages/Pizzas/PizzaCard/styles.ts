@@ -6,18 +6,21 @@ export const PizzaCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-  overflow: hidden
+  overflow: hidden;
+  justify-content: space-between;
 `;
 
 export const FlexRow = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 4px 0;
 `
 
 export const PizzaImagem = styled.img`
   width: 100%;
-  height: 62dvh;
+  height: 52dvh;
   object-fit: cover;
 `
 
@@ -31,11 +34,13 @@ export const PizzaNome = styled.p`
 `
 
 export const PizzaSpan = styled.span`
+  font-size: .85rem;
   padding: 4px 8px;
   margin: 0 0 0 8px;
   background-color: #d9d9d9;
-  flex-wrap: wrap;
+  
   border-radius: 12px;
+  text-wrap: nowrap;
 `
 
 export const PizzaDescricao = styled.p`
@@ -62,6 +67,7 @@ export const PizzaIndisponivel = styled.p`
 
 export const BottomContainer = styled.div`
   background-color: #F2A81F;
+  height: max-content;
   display: flex;
   justify-content: space-between;
   align-items: center;

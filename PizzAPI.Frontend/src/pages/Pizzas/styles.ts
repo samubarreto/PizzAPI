@@ -5,6 +5,7 @@ export const PizzasContainer = styled.main`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 25px;
   margin: 0 30px;
+  overflow-y: scroll;
 `;
 
 export const UpperContainer = styled.div`
@@ -38,11 +39,11 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px 30px;
+  padding: 10px;
   border-radius: 15px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
   width: 40dvw;
-  margin: 0 auto;
+  gap: 4px;
 `;
 
 export const FormTitle = styled.p`
@@ -56,12 +57,11 @@ export const ConfirmForm = styled.button`
   background-color: #4caf50; /* Verde */
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 6px 12px;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
   font-weight: bold;
-  margin-top: 15px;
   transition: all 0.3s ease;
 
   &:hover {
@@ -79,12 +79,11 @@ export const CancelForm = styled.button`
   background-color: #f44336; /* Vermelho */
   color: #fff;
   border: none;
-  padding: 10px 20px;
+  padding: 6px 12px;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
   font-weight: bold;
-  margin-top: 10px;
   transition: all 0.3s ease;
   margin-left: 12px;
 
@@ -95,16 +94,15 @@ export const CancelForm = styled.button`
 `;
 
 export const FormInput = styled.input`
-  flex: 1;
-  padding: 10px;
-  margin: 10px 0;
+  width: 100%;
+  padding: 6px 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
   color: #333;
 
   &:focus {
-    border-color: #ff6347;
+    border-color: #F2A81F;
     outline: none;
     box-shadow: 0 0 4px rgba(255, 99, 71, 0.5);
   }
@@ -112,8 +110,7 @@ export const FormInput = styled.input`
 
 export const FormTextarea = styled.textarea`
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 6px 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
   resize: vertical;
@@ -122,7 +119,7 @@ export const FormTextarea = styled.textarea`
   resize: none;
 
   &:focus {
-    border-color: #ff6347;
+    border-color: #F2A81F;
     outline: none;
     box-shadow: 0 0 4px rgba(255, 99, 71, 0.5);
   }
@@ -130,15 +127,14 @@ export const FormTextarea = styled.textarea`
 
 export const FormSelect = styled.select`
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 6px 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
   color: #333;
 
   &:focus {
-    border-color: #ff6347;
+    border-color: #F2A81F;
     outline: none;
     box-shadow: 0 0 4px rgba(255, 99, 71, 0.5);
   }
@@ -146,9 +142,44 @@ export const FormSelect = styled.select`
 
 export const FlexRowSpace = styled.div`
   width: 100%;
-  gap: 12px;
+  gap: 4px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   text-wrap: nowrap;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 4px;
+  /* background-color: #d1d1d1; */
+
+  & label {
+    padding: 0 0 0 8px;
+  }
+
+  & input[type='checkbox'] {
+    margin: 0 0 0 8px;
+  }
+
+  & img {
+    height: 80px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+`
+
+export const BottomRow = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 8px;
+`
+
+export const MiddleRow = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
 `

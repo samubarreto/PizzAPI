@@ -35,10 +35,10 @@ export default function PizzaCard({ pizza }: PizzaCardProps) {
         <PizzaNome>Pizza de {pizza.sabor}</PizzaNome>
         <PizzaDescricao>{pizza.descricao}</PizzaDescricao>
         <FlexRow>
-          <PizzaSpan>{TipoTamanhoPizza[pizza.tamanho]}</PizzaSpan>
-          <PizzaSpan>{TipoMassaPizza[pizza.massa]}</PizzaSpan>
-          {pizza.recheioBorda != undefined && <PizzaSpan>{TipoRecheioBorda[pizza.recheioBorda + 1]}</PizzaSpan>}
-          {pizza.disponivel ? <PizzaDisponivel>DISP</PizzaDisponivel> : <PizzaIndisponivel>INDISP</PizzaIndisponivel>}
+          <PizzaSpan>Tamanho: {TipoTamanhoPizza[pizza.tamanho]}</PizzaSpan>
+          <PizzaSpan>Massa: {TipoMassaPizza[pizza.massa]}</PizzaSpan>
+          {pizza.recheioBorda != undefined && <PizzaSpan>Borda: {TipoRecheioBorda[pizza.recheioBorda]}</PizzaSpan>}
+          {pizza.disponivel ? <PizzaDisponivel>DISPONÍVEL</PizzaDisponivel> : <PizzaIndisponivel>INDISPONÍVEL</PizzaIndisponivel>}
         </FlexRow>
         <BottomContainer>
           <div>
