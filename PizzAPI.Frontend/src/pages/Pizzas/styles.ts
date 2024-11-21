@@ -5,7 +5,7 @@ export const PizzasContainer = styled.main`
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 25px;
   margin: 0 30px;
-  overflow-y: scroll;
+  overflow-x: visible;
 `;
 
 export const UpperContainer = styled.div`
@@ -140,7 +140,7 @@ export const FormSelect = styled.select`
   }
 `;
 
-export const FlexRowSpace = styled.div`
+export const Row = styled.div`
   width: 100%;
   gap: 4px;
   display: flex;
@@ -161,10 +161,16 @@ export const FlexRowSpace = styled.div`
     margin: 0 0 0 8px;
   }
 
+  & input[type='number'],
+  & select {
+    max-width: 120px;
+  }
+
   & img {
     height: 80px;
     width: 100%;
     object-fit: cover;
+    overflow: hidden;
     border-radius: 4px;
   }
 `
@@ -182,4 +188,13 @@ export const MiddleRow = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-start;
+`
+
+export const Column = styled.div`
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-wrap: nowrap;
 `

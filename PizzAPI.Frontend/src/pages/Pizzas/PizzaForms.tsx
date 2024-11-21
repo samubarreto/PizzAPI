@@ -9,9 +9,10 @@ import {
   FormInput, 
   FormSelect, 
   FormTextarea, 
-  FlexRowSpace,
+  Row,
   BottomRow,
-  MiddleRow
+  MiddleRow,
+  Column
 } from "./styles";
 import { TipoMassaPizza } from "../../dtos/enums/TipoMassaPizza";
 import { TipoRecheioBorda } from "../../dtos/enums/TipoRecheioBorda";
@@ -65,7 +66,7 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
       <Form onSubmit={handleSubmit}>
         <FormTitle>{formState._id ? "Editar Pizza" : "Inserir Pizza"}</FormTitle>
 
-        <FlexRowSpace>
+        <Row>
           <label htmlFor="sabor">Sabor:</label>
           <FormInput
             id="sabor"
@@ -76,9 +77,9 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
             onChange={handleChange}
             required
           />
-        </FlexRowSpace>
+        </Row>
 
-        <FlexRowSpace>
+        <Row>
           <label htmlFor="descricao">Descrição:</label>
           <FormTextarea
             id="descricao"
@@ -88,9 +89,9 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
             onChange={handleChange}
             required
           />
-        </FlexRowSpace>
+        </Row>
 
-        <FlexRowSpace>
+        <Row>
           <label htmlFor="urlImagem">URL da Imagem:</label>
           <FormInput
             id="urlImagem"
@@ -101,91 +102,93 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
             onChange={handleChange}
           />
           <img src={formState.urlImagem} onError={(e) => { const target = e.target as HTMLImageElement; target.src = PIZZA_PLACEHOLDER }}/>
-        </FlexRowSpace>
+        </Row>
 
-        <FlexRowSpace>
-          <label htmlFor="preco">Preço:</label>
-          <FormInput
-            id="preco"
-            type="number"
-            step="0.1"
-            name="preco"
-            placeholder="Preço"
-            value={formState.preco}
-            onChange={handleChange}
-            required
-          />
-        </FlexRowSpace>
+        <Row style={{flexDirection:'row'}}>
+          <Column>
+            <label htmlFor="preco">Preço (R$):</label>
+            <FormInput
+              id="preco"
+              type="number"
+              step="0.1"
+              name="preco"
+              placeholder="Preço"
+              value={formState.preco}
+              onChange={handleChange}
+              required
+              />
+            </Column>
 
-        <FlexRowSpace>
-          <label htmlFor="peso">Peso (kg):</label>
-          <FormInput
-            id="peso"
-            type="number"
-            step="0.1"
-            name="peso"
-            placeholder="Peso (kg)"
-            value={formState.peso}
-            onChange={handleChange}
-            required
-          />
-        </FlexRowSpace>
+          <Column>
+            <label htmlFor="peso">Peso (kg):</label>
+            <FormInput
+              id="peso"
+              type="number"
+              step="0.1"
+              name="peso"
+              placeholder="Peso (kg)"
+              value={formState.peso}
+              onChange={handleChange}
+              required
+            />
+          </Column>
 
-        <FlexRowSpace>
-          <label htmlFor="massa">Tipo de Massa:</label>
-          <FormSelect
-            id="massa"
-            name="massa"
-            value={formState.massa || 0}
-            onChange={handleChange}>
-            <option value="" disabled>Selecione</option>
-            {Object.entries(TipoMassaPizza)
-              .filter(([value]) => isNaN(Number(value)))
-              .map(([key, value]) => (
-                <option key={key} value={value}>
-                  {key}
-                </option>
-              ))}
-          </FormSelect>
-        </FlexRowSpace>
-
-        <FlexRowSpace>
-          <label htmlFor="tamanho">Tamanho:</label>
-          <FormSelect
-            id="tamanho"
-            name="tamanho"
-            value={formState.tamanho || 0}
-            onChange={handleChange}>
-            <option value="" disabled>Selecione</option>
-            {Object.entries(TipoTamanhoPizza)
-              .filter(([value]) => isNaN(Number(value)))
-              .map(([key, value]) => (
-                <option key={key} value={value}>
-                  {key}
-                </option>
-              ))}
-          </FormSelect>
-        </FlexRowSpace>
-
-        <FlexRowSpace>
+          <Column>
+            <label htmlFor="massa">Tipo de Massa:</label>
+            <FormSelect
+              id="massa"
+              name="massa"
+              value={formState.massa || 0}
+              onChange={handleChange}>
+              <option value="" disabled>Selecione</option>
+              {Object.entries(TipoMassaPizza)
+                .filter(([value]) => isNaN(Number(value)))
+                .map(([key, value]) => (
+                  <option key={key} value={value}>
+                    {key}
+                  </option>
+                ))}
+            </FormSelect>
+          </Column>
+            
+          <Column>
+            <label htmlFor="tamanho">Tamanho:</label>
+            <FormSelect
+              id="tamanho"
+              name="tamanho"
+              value={formState.tamanho || 0}
+              onChange={handleChange}>
+              <option value="" disabled>Selecione</option>
+              {Object.entries(TipoTamanhoPizza)
+                .filter(([value]) => isNaN(Number(value)))
+                .map(([key, value]) => (
+                  <option key={key} value={value}>
+                    {key}
+                  </option>
+                ))}
+            </FormSelect>
+          </Column>
+            
+          <Column>
           <label htmlFor="recheioBorda">Borda:</label>
-          <FormSelect
-            id="recheioBorda"
-            name="recheioBorda"
-            value={formState.recheioBorda || 0}
-            onChange={handleChange}>
-            <option value="" disabled>Selecione</option>
-            {Object.entries(TipoRecheioBorda)
-              .filter(([value]) => isNaN(Number(value)))
-              .map(([key, value]) => (
-                <option key={key} value={value}>
-                  {key}
-                </option>
-              ))}
-          </FormSelect>
-        </FlexRowSpace>
+            <FormSelect
+              id="recheioBorda"
+              name="recheioBorda"
+              value={formState.recheioBorda || 0}
+              onChange={handleChange}>
+              <option value="" disabled>Selecione</option>
+              {Object.entries(TipoRecheioBorda)
+                .filter(([value]) => isNaN(Number(value)))
+                .map(([key, value]) => (
+                  <option key={key} value={value}>
+                    {key}
+                  </option>
+                ))}
+            </FormSelect>
+          </Column>
+        </Row>
 
-        <FlexRowSpace style={{flexDirection:'row'}}>
+        <Row style={{flexDirection:'row'}}>
           <label htmlFor="disponivel">Disponível:</label>
           <input
             id="disponivel"
@@ -194,7 +197,7 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
             checked={!!formState.disponivel}
             onChange={handleChange}
           />
-        </FlexRowSpace>
+        </Row>
 
         <BottomRow>
           <CancelForm type="button" onClick={onClose}>Cancelar</CancelForm>
