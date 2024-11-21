@@ -1,5 +1,5 @@
-import { TipoPagamentoPedido } from "../enums/TipoPagamentoPedido"
-import { TipoStatusPedido } from "../enums/TipoStatusPedido"
+import { TipoPagamentoPedido } from "./enums/TipoPagamentoPedido"
+import { TipoStatusPedido } from "./enums/TipoStatusPedido"
 
 export type Pedido = {
   _id?: string,
