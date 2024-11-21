@@ -40,17 +40,16 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
-    // Normalizar os dados antes de enviar
     const normalizedFormState = {
       ...formState,
       preco: formState.preco ? parseFloat(formState.preco.toString()) : 0,
       peso: formState.peso ? parseFloat(formState.peso.toString()) : 0,
       recheioBorda: formState.recheioBorda ? parseInt(formState.recheioBorda.toString(), 10) : 0,
       tamanho: formState.tamanho ? parseInt(formState.tamanho.toString(), 10) : 0,
-      massa: formState.massa ? parseInt(formState.massa.toString(), 10) : 0,
+      massa: formState.massa ? parseFloat(formState.massa.toString()) : 0,
       disponivel: !!formState.disponivel,
-      criadoEm: formState.criadoEm || new Date().toISOString(),
-      atualizadoEm: new Date().toISOString(),
+      urlImagem: formState.urlImagem || "https://thumbs.dreamstime.com/b/teste-padr%C3%A3o-sem-emenda-da-pizza-teste-padr%C3%A3o-da-pizza-do-vetor-89205691.jpg",
+      atualizadoEm: new Date(),
     };
   
     await salvarPizza(normalizedFormState as unknown as Partial<Pizza>);
@@ -72,6 +71,7 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
             placeholder="Sabor"
             value={formState.sabor || ""}
             onChange={handleChange}
+            required
           />
         </FlexRowSpace>
 
@@ -83,6 +83,7 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
             placeholder="Descrição"
             value={formState.descricao || ""}
             onChange={handleChange}
+            required
           />
         </FlexRowSpace>
 
@@ -93,7 +94,7 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
             type="text"
             name="urlImagem"
             placeholder="URL da Imagem"
-            value={formState.urlImagem || "https://images.unsplash.com/photo-1576458088443-04a19bb13da6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
+            value={formState.urlImagem}
             onChange={handleChange}
           />
         </FlexRowSpace>
@@ -106,8 +107,9 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
             step="0.1"
             name="preco"
             placeholder="Preço"
-            value={formState.preco || 0}
+            value={formState.preco}
             onChange={handleChange}
+            required
           />
         </FlexRowSpace>
 
@@ -119,8 +121,9 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
             step="0.1"
             name="peso"
             placeholder="Peso (kg)"
-            value={formState.peso || 0}
+            value={formState.peso}
             onChange={handleChange}
+            required
           />
         </FlexRowSpace>
 
@@ -210,7 +213,7 @@ export function PizzaDeleteForm({ pizza, onClose }: ModalPizzaProps) {
     <FundoPreto>
       <Form onSubmit={(e) => { e.preventDefault(); handleDelete(); }}>
         <FormTitle>Excluir Pizza</FormTitle>
-        <p>Tem certeza de que deseja excluir a pizza {pizza?.sabor}?</p>
+        <p>Tem certeza de que deseja excluir a pizza de {pizza?.sabor}?</p>
         <div>
           <ConfirmForm type="submit">Confirmar</ConfirmForm>
           <CancelForm type="button" onClick={onClose}>Cancelar</CancelForm>

@@ -14,5 +14,5 @@ export interface Pizza {
   disponivel: boolean,
   criadoEm: Date,
   atualizadoEm: Date,
-  urlImagem?: string
+  urlImagem: string
 }

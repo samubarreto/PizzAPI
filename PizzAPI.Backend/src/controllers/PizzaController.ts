@@ -17,9 +17,9 @@ export class PizzaController {
       if (pizza) {
         return res.status(200).json(pizza);
       }
-      return res.sendStatus(404);
+      return res.status(404).send({ message: "not found" });
     } catch (error) {
-      return res.sendStatus(500);
+      return res.status(500).send({ message: "internal server error" });
     }
   }
 
@@ -31,35 +31,35 @@ export class PizzaController {
       const pizzas = await this.pizzaService.getPizzas(skip, pageSize, search);
       return res.status(200).json(pizzas);
     } catch (error) {
-      return res.sendStatus(500);
+      return res.status(500).send({ message: "internal server error" });
     }
   }
 
   upsertPizza = async (req: Request, res: Response) => {
     const pizza: Pizza = req.body;
     if (!pizza) {
-      return res.sendStatus(400);
+      return res.status(400).send({ message: "bad request" });
     }
 
     if (!pizza._id) {
       try {
         const result = await this.pizzaService.insertPizza(pizza);
         if (result) {
-          return res.sendStatus(201);
+          return res.status(201).send({ message: "created" });
         }
-        return res.sendStatus(422);
+        return res.status(422).send({ message: "unproccessable entity" });
       } catch (error) {
-        return res.sendStatus(500);
+        return res.status(500).send({ message: "internal server error" });
       }
     } else {
       try {
         const result = await this.pizzaService.updatePizza(pizza);
         if (result) {
-          return res.sendStatus(200);
+          return res.status(200).send({ message: "ok" });
         }
-        return res.sendStatus(404);
+        return res.status(404).send({ message: "not found" });
       } catch (error) {
-        return res.sendStatus(500);
+        return res.status(500).send({ message: "internal server error" });
       }
     }
   }
@@ -69,11 +69,11 @@ export class PizzaController {
     try {
       const result = await this.pizzaService.deletePizza(pizzaId);
       if (result) {
-        return res.sendStatus(204);
+        return res.status(204).send({ message: "no content" });
       }
-      return res.sendStatus(404);
+      return res.status(404).send({ message: "not found" });
     } catch (error) {
-      return res.sendStatus(500);
+      return res.status(500).send({ message: "internal server error" });
     }
   }
 }
