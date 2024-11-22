@@ -13,5 +13,6 @@ export interface Pizza {
   massa: TipoMassaPizza,
   disponivel: boolean,
   atualizadoEm: Date,
-  urlImagem: string
+  urlImagem: string,
+  quantidade?: number
 }

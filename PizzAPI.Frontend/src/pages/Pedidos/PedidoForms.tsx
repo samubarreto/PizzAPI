@@ -129,7 +129,7 @@ export function PedidoDeleteForm({ pedido, onClose }: ModalPedidoProps) {
     <FundoPreto>
       <Form onSubmit={(e) => { e.preventDefault(); handleDelete(); }} style={{width:'30dvw'}}>
         <FormTitle>Excluir Pedido</FormTitle>
-        <MiddleRow>-Tem certeza de que deseja excluir a pedido de {pedido?.cliente}?</MiddleRow>
+        <MiddleRow>-Tem certeza de que deseja excluir o pedido de {pedido?.cliente}?</MiddleRow>
         <BottomRow>
           <CancelForm type="button" onClick={onClose}>Cancelar</CancelForm>
           <ConfirmForm type="submit">Confirmar</ConfirmForm>

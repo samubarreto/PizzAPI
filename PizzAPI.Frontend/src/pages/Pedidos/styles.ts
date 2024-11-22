@@ -2,11 +2,9 @@ import styled from 'styled-components';
 
 export const PedidosContainer = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px 0;
 `;
 
 export const UpperContainer = styled.div`
@@ -176,7 +174,7 @@ export const Row = styled.div`
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 4px;
-  /* background-color: #d1d1d1; */
+  background-color: #f2f2f2;
 
   & label {
     padding: 0 0 0 8px;

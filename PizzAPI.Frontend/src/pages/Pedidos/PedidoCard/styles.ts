@@ -6,7 +6,7 @@ export const PedidoCardContainer = styled.div`
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
-  margin: 8px auto;
+  margin: 0 auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -39,7 +39,8 @@ export const PizzaList = styled.ul`
 
 export const CardActions = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 8px;
   margin-top: 8px;
 
   button {

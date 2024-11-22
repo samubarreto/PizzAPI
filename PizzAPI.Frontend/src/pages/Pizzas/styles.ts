@@ -43,7 +43,7 @@ export const Form = styled.form`
   border-radius: 15px;
   box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
   width: 40dvw;
-  gap: 4px;
+  gap: 12px;
 `;
 
 export const FormTitle = styled.p`
@@ -151,7 +151,7 @@ export const Row = styled.div`
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 4px;
-  /* background-color: #d1d1d1; */
+  background-color: #f2f2f2;
 
   & label {
     padding: 0 0 0 8px;
