@@ -16,7 +16,7 @@ export default function Pedidos() {
   const [totalPages, setTotalPages] = useState<number>(1);
   const [search, setSearch] = useState<string>(""); 
   const [loading, setLoading] = useState<boolean>(true); 
-  const pageSize = 5;
+  const pageSize = 3;
 
   const fetchPedidos = async () => {
     try {

@@ -7,7 +7,7 @@ export class PedidoController {
 
   count = async (req: Request, res: Response) => {
     const countPedidos = await this.pedidoService.count();
-    return res.status(200).send(countPedidos.toString());
+    return res.status(200).json({ count: countPedidos });
   };
 
   getPedidoById = async (req: Request, res: Response) => {
