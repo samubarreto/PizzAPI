@@ -85,7 +85,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"sabor\": \"cogumelo\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"preco\": 69.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 0,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true,\r\n    \"urlImagem\": \"https://images.unsplash.com/photo-1576458088443-04a19bb13da6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\r\n}\r\n",
+							"raw": "{\r\n    \"sabor\": \"chocolate\",\r\n    \"descricao\": \"Pizza clássica de mussarela, com molho de tomate caseiro e muito queijo.\",\r\n    \"preco\": 99.90,\r\n    \"peso\": 0.5,\r\n    \"recheioBorda\": 0,\r\n    \"tamanho\": 1,\r\n    \"massa\": 0,\r\n    \"disponivel\": true,\r\n    \"urlImagem\": \"https://images.unsplash.com/photo-1576458088443-04a19bb13da6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -232,7 +232,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"pizzas\": [\r\n        { \"pizzaId\": \"6736082d48b945a692163d49\", \"quantidade\": 2 }\r\n    ],\r\n    \"cliente\": \"João Silva\",\r\n    \"endereco\": \"Rua das Pizzas, 123, Bairro Central\",\r\n    \"metodoPagamento\": 0,\r\n    \"status\": 1,\r\n    \"observacoes\": \"Incluir talheres descartáveis\"\r\n}\r\n",
+							"raw": "{\r\n    \"pizzas\": [\r\n        { \"pizzaId\": \"6740c5ca7ad799263043bc6a\", \"quantidade\": 11 },\r\n        { \"pizzaId\": \"673fbe257a647375e9aee9d8\", \"quantidade\": 101 }\r\n    ],\r\n    \"cliente\": \"João Silva\",\r\n    \"endereco\": \"Rua das Pizzas, 123, Bairro Central\",\r\n    \"metodoPagamento\": 0,\r\n    \"status\": 3,\r\n    \"observacoes\": \"Incluir talheres descartáveis\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
