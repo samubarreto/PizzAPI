@@ -1,8 +1,8 @@
 <div align="center">
 
   # PizzAPI 🍕
+  ###### Aplicação Web para cadastrar e administrar <br> sabores de Pizza e seus Pedidos
   ![My Skills](https://skillicons.dev/icons?i=ts,react,nodejs,express,mongodb)
-  ###### Aplicação Web para cadastrar e administrar sabores de Pizza e Pedidos
 
 </div>
 
