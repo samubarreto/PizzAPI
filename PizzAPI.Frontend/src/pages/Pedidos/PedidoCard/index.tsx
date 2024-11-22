@@ -1,7 +1,16 @@
-export default function PedidoCard() {
+import { Pedido } from "../../../dtos/Pedido"
+import { PedidoCardContainer } from "./styles"
+
+interface PedidoCardProps {
+  pedido: Pedido
+}
+
+export default function PedidoCard({ pedido }: PedidoCardProps) {
   return (
     <>
-      pedido card
+      <PedidoCardContainer>
+        fazer
+      </PedidoCardContainer>
     </>
   )
 }

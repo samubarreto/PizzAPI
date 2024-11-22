@@ -18,6 +18,7 @@ import { TipoMassaPizza } from "../../dtos/enums/TipoMassaPizza";
 import { TipoRecheioBorda } from "../../dtos/enums/TipoRecheioBorda";
 import { TipoTamanhoPizza } from "../../dtos/enums/TipoTamanhoPizza";
 import { salvarPizza, deletarPizza } from "../../services/pizzaService";
+import { PIZZA_PLACEHOLDER } from "../../services/utils";
 
 interface ModalPizzaProps {
   pizza: Partial<Pizza> | null;
@@ -26,8 +27,7 @@ interface ModalPizzaProps {
 
 export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
   const [formState, setFormState] = useState<Partial<Pizza>>(pizza || {});
-  const PIZZA_PLACEHOLDER = "https://img.freepik.com/fotos-gratis/natureza-morta-de-pratos-de-fast-food_23-2149187946.jpg?t=st=1732230116~exp=1732233716~hmac=abcde0a69cf23d7af43614b0b6a1de2e0dfbc09e872feb85805b57e076ac1803&w=1060";
-
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
   
@@ -60,7 +60,6 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
     window.location.reload();
   };
   
-
   return (
     <FundoPreto>
       <Form onSubmit={handleSubmit}>

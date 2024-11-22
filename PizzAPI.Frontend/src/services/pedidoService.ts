@@ -1,45 +1,42 @@
+import { Pedido } from "../dtos/Pedido";
 import { API_URL } from "./utils";
 
-export async function listarPedidos(skip = 0, pageSize = 10, search = '') {
-  return fetch(`${API_URL}/api/pedido?search=${search}&skip=${skip}&pageSize=${pageSize}`);
+export async function getPedidos(skip = 0, pageSize = 10, search = ''): Promise<Pedido[]> {
+  const response = await fetch(`${API_URL}/api/pedido?search=${search}&skip=${skip}&pageSize=${pageSize}`);
+  const pedidos: Pedido[] = await response.json();
+  return pedidos;
 }
 
-// export function getClienteById(id_cliente) {
-//   var response = fetch(URL_API + "/api/clientes/" + id_cliente);
-//   return response;
-// }
+export async function getPedidoById(idPedido: string) {
+  const response = await fetch(`${API_URL}/api/pedido/${idPedido}`);
+  const pedido: Pedido = await response.json();
+  return pedido;
+}
 
-// export function deletarCliente(id_cliente) {
-//   var request = {
-//     method: "DELETE"
-//   }
-//   var response = fetch(URL_API + "/api/clientes/" + id_cliente, request)
-//   return response;
-// }
+export async function getCountPedidos() {
+  const response = await fetch(`${API_URL}/api/pedidoCount/`);
+  const data = await response.json();
+  const quantidadePedidos: number = data.count;
+  return quantidadePedidos;
+}
 
-// export function postPutCliente(cliente) {
 
-//   var request = {
-//     method: cliente.id ? "PUT" : "POST",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify(cliente)
-//   }
+export async function deletarPedido(idPedido: string) {
+  let request = {
+    method: "DELETE"
+  }
+  let response = await fetch(`${API_URL}/api/pedido/${idPedido}`, request);
+  return response.status;
+}
 
-//   var response = fetch(URL_API + "/api/clientes", request)
-//   return response;
-// }
-
-// export function uparImagemPerfil(form, id_cliente) {
-//   var formData = new FormData(form);
-
-//   var request = { method: "POST", body: formData }
-
-//   try {
-//     var response = fetch(URL_API + "/api/clientes/UploadProfilePic/" + id_cliente, request)
-//     return response;
-//   } catch (error) {
-//     return null
-//   }
-// }
+export async function salvarPedido(pedido: Partial<Pedido>) {
+  const request = {
+    method: pedido._id ? "PUT" : "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pedido),
+  };
+  const response = await fetch(`${API_URL}/api/pedido`, request);
+  return response.json();
+}

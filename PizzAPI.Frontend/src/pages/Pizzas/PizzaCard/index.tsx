@@ -17,6 +17,7 @@ import {
   BotaoPizza
 } from "./styles";
 import { PizzaDeleteForm, PizzaUpsertForm } from "../PizzaForms";
+import { PIZZA_PLACEHOLDER } from "../../../services/utils";
 
 interface PizzaCardProps {
   pizza: Pizza;
@@ -25,7 +26,6 @@ interface PizzaCardProps {
 export default function PizzaCard({ pizza }: PizzaCardProps) {
   const [pizzaDelete, setPizzaDelete] = useState<Pizza | undefined>(undefined);
   const [pizzaEdit, setPizzaEdit] = useState<Pizza | undefined>(undefined);
-  const PIZZA_PLACEHOLDER = "https://img.freepik.com/fotos-gratis/natureza-morta-de-pratos-de-fast-food_23-2149187946.jpg?t=st=1732230116~exp=1732233716~hmac=abcde0a69cf23d7af43614b0b6a1de2e0dfbc09e872feb85805b57e076ac1803&w=1060";
 
   return (
     <>

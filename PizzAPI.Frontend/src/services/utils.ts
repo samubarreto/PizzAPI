@@ -1,1 +1,2 @@
 export const API_URL = "http://localhost:5001";
+export const PIZZA_PLACEHOLDER = 'https://media.gettyimages.com/id/1461517434/pt/vetorial/seamless-pizza-sketch-wallpaper-vector-illustration.jpg?s=612x612&w=0&k=20&c=8pR1zLmUwFkGvBbWlF3eyL3HW4IfuuSptpHT14lBbY8=';

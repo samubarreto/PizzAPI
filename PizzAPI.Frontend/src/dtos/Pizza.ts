@@ -12,7 +12,6 @@ export interface Pizza {
   tamanho: TipoTamanhoPizza,
   massa: TipoMassaPizza,
   disponivel: boolean,
-  criadoEm: Date,
   atualizadoEm: Date,
   urlImagem: string
 }

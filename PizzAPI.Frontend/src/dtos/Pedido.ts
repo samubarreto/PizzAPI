@@ -11,7 +11,6 @@ export type Pedido = {
   endereco: string,
   metodoPagamento: TipoPagamentoPedido
   status: TipoStatusPedido,
-  criadoEm: Date,
   atualizadoEm: Date,
   entregueEm?: Date | null,
   observacoes?: string
