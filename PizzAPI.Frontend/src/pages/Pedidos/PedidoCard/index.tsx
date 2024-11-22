@@ -51,7 +51,8 @@ export default function PedidoCard({ pedido }: PedidoCardProps) {
           )}
           <p><strong>Preço total:</strong> R$ {pedido.precoTotal?.toFixed(2)}</p>
           <p><strong>Forma de Pagamento:</strong> {TipoPagamentoPedido[pedido.metodoPagamento]}</p>
-          <p><strong>OBS:</strong> {pedido.observacoes}</p>
+          { pedido.observacoes && <p><strong>OBS:</strong> {pedido.observacoes}</p> }
+          
         </div>
         <CardActions>
           <button onClick={() => setPedidoEdit(pedido)}>✏️Editar</button>

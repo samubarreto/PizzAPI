@@ -108,7 +108,7 @@ export const MiddleRow = styled.div`
 `
 
 export const Column = styled.div`
-  width: fit-content;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -150,6 +150,7 @@ export const FormTextarea = styled.textarea`
 
 export const FormSelect = styled.select`
   width: 100%;
+  min-width: 250px;
   padding: 6px 8px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -196,4 +197,28 @@ export const Row = styled.div`
     overflow: hidden;
     border-radius: 4px;
   }
+`
+
+export const SelecaoPizza = styled.div`
+  overflow-x: scroll;
+  overflow: scroll;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  width: 100%;
+  &::-webkit-scrollbar {
+  display: block;
+}
+`
+
+export const PizzaInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+export const PizzaImg = styled.img`
+  width: 50px;
+  object-fit: cover;
 `
