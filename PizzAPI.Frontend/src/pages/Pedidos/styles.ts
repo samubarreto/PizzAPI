@@ -215,10 +215,17 @@ export const PizzaInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding: 8px;
+  gap: 2px;
+  background-color: #222222;
+  color: #fff;
+  border-radius: 16px;
+  width: 175px;
 `
 
 export const PizzaImg = styled.img`
   width: 50px;
   object-fit: cover;
+  overflow: hidden;
 `

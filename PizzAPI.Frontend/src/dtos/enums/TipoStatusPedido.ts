@@ -6,8 +6,8 @@ export enum TipoStatusPedido {
 }
 
 export const statusColors: Record<number, string> = {
-  1: "#FFC107", // amarelo
-  2: "#17A2B8", // azul
-  3: "#006e80", // azul escuro
-  4: "#28A745", // amarelo
+  0: "#FFC107", // amarelo
+  1: "#17A2B8", // azul
+  2: "#0339fc", // azul escuro
+  3: "#28A745", // amarelo
 };

@@ -15,8 +15,15 @@ interface ModalPedidoProps {
 }
 
 export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
-  const [formState, setFormState] = useState<Partial<Pedido>>(pedido || {});
-  const [pizzas, setPizzas] = useState<Pizza[] | undefined>(undefined);
+  const [formState, setFormState] = useState({
+    cliente: pedido?.cliente || "",
+    endereco: pedido?.endereco || "",
+    metodoPagamento: pedido?.metodoPagamento || 0,
+    status: pedido?.status || 0,
+    observacoes: pedido?.observacoes || "",
+    pizzas: pedido?.pizzas || [],
+  });
+  const [pizzas, setPizzas] = useState<Pizza[]>([]);
 
   const fetchPizzas = async () => {
     try {
@@ -26,7 +33,7 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
       console.error(error.message);
     }
   };
-  
+
   useEffect(() => {
     fetchPizzas();
   }, []);
@@ -35,26 +42,41 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
     const { name, value, type } = e.target;
     setFormState((prev) => ({
       ...prev,
-      [name]: type === "number" ? parseFloat(value) : value,
+      [name]: type === "number" ? parseInt(value) : value,
     }));
+  };
+
+  const handlePizzaChange = (pizzaId: string, quantidade: number) => {
+    setFormState((prev) => {
+      const updatedPizzas = prev.pizzas.filter((p) => p.pizzaId !== pizzaId);
+      if (quantidade > 0) {
+        updatedPizzas.push({ pizzaId, quantidade });
+      }
+      return { ...prev, pizzas: updatedPizzas };
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const normalizedFormState: Partial<Pedido> = {
-      ...formState,
-      atualizadoEm: new Date(),
-    };
-
-    await salvarPedido(normalizedFormState);
-    window.location.reload();
+    try {
+      const payload = {
+        ...formState,
+        status: Number(formState.status),
+      };
+  
+      await salvarPedido(pedido?._id ? { ...payload, _id: pedido._id } : payload);
+  
+      window.location.reload();
+    } catch (error) {
+      console.error("Erro ao salvar o pedido:", error);
+    }
   };
+  
 
   return (
     <FundoPreto>
       <Form onSubmit={handleSubmit}>
-        <FormTitle>{formState._id ? "Editar Pedido" : "Novo Pedido"}</FormTitle>
+        <FormTitle>{pedido?._id ? "Editar Pedido" : "Novo Pedido"}</FormTitle>
 
         <Row>
           <label htmlFor="cliente">Cliente:</label>
@@ -63,7 +85,7 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
             type="text"
             name="cliente"
             placeholder="Nome do cliente"
-            value={formState.cliente || ""}
+            value={formState.cliente}
             onChange={handleChange}
             required
           />
@@ -75,13 +97,13 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
             id="endereco"
             name="endereco"
             placeholder="Endereço de entrega"
-            value={formState.endereco || ""}
+            value={formState.endereco}
             onChange={handleChange}
             required
           />
         </Row>
 
-        <Row style={{flexDirection:"row"}}>
+        <Row style={{flexDirection:'row'}}>
           <Column>
             <label htmlFor="metodoPagamento">Método de Pagamento:</label>
             <FormSelect
@@ -98,11 +120,10 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
                   <option key={key} value={value}>
                     {key}
                   </option>
-                ))
-              }
-            </FormSelect>
+              ))}
+          </FormSelect>
           </Column>
-            
+
           <Column>
             <label htmlFor="status">Status:</label>
             <FormSelect
@@ -119,10 +140,9 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
                   <option key={key} value={value}>
                     {key}
                   </option>
-                ))
-              }
+              ))}
             </FormSelect>
-          </Column>
+          </Column>  
         </Row>
 
         <Row>
@@ -131,14 +151,24 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
             id="observacoes"
             name="observacoes"
             placeholder="Adicione observações, se necessário"
-            value={formState.observacoes || ""}
+            value={formState.observacoes}
             onChange={handleChange}
           />
         </Row>
 
         <Row>
-          <label htmlFor="pizzas">Pizzas:</label>
-          { pizzas && <SelecaoPizza>{ pizzas?.map((pizza) => (<PizzaInput key={pizza._id} pizza={pizza} />)) }</SelecaoPizza> }
+          <label>Pizzas:</label>
+          {pizzas.length > 0 && (
+            <SelecaoPizza>
+              {pizzas.map((pizza) => (
+                <PizzaInput
+                  key={pizza._id}
+                  pizza={pizza}
+                  onQuantityChange={handlePizzaChange}
+                />
+              ))}
+            </SelecaoPizza>
+          )}
         </Row>
 
         <BottomRow>
@@ -150,6 +180,43 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
   );
 }
 
+interface PizzaInputProps {
+  pizza: Pizza;
+  onQuantityChange: (pizzaId: string, quantidade: number) => void;
+}
+
+function PizzaInput({ pizza, onQuantityChange }: PizzaInputProps) {
+  const [quantity, setQuantity] = useState<number>(0);
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const quantidade = parseInt(e.target.value, 10) || 0;
+    setQuantity(quantidade);
+    onQuantityChange(pizza._id!, quantidade);
+  };
+
+  return (
+    <PizzaInputContainer>
+      <PizzaImg
+        src={pizza.urlImagem || PIZZA_PLACEHOLDER}
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src = PIZZA_PLACEHOLDER;
+        }}
+      />
+      <p>{pizza.sabor} | R$ {pizza.preco.toFixed(2)}</p>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
+        <label style={{ padding:0 }} >Quantidade:</label>
+        <FormInput
+          style={{maxWidth: '50px'}}
+          type="number"
+          min="0"
+          value={quantity}
+          onChange={handleQuantityChange}
+        />
+      </div>
+    </PizzaInputContainer>
+  );
+}
 
 export function PedidoDeleteForm({ pedido, onClose }: ModalPedidoProps) {
   const handleDelete = async () => {
@@ -170,46 +237,5 @@ export function PedidoDeleteForm({ pedido, onClose }: ModalPedidoProps) {
         </BottomRow>
       </Form>
     </FundoPreto>
-  );
-}
-
-interface PizzaInputProps {
-  pizza: Pizza;
-}
-
-function PizzaInput({ pizza }: PizzaInputProps) {
-  const [quantity, setQuantity] = useState<number>(0);
-
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value, 10);
-    setQuantity(isNaN(value) ? 0 : value);
-  };
-
-  return (
-    <PizzaInputContainer>
-      <PizzaImg
-        src={pizza.urlImagem || PIZZA_PLACEHOLDER}
-        onError={(e) => { const target = e.target as HTMLImageElement; target.src = PIZZA_PLACEHOLDER }}
-        style={{
-          width: "100px",
-          height: "100px",
-          objectFit: "cover",
-          borderRadius: "8px",
-        }}
-      />
-      <p>Sabor: {pizza.sabor}</p>
-      <p>Preço: R$ {pizza.preco.toFixed(2)}</p>
-      <div>
-        <label>Qtd:</label>
-        <input
-          type="number"
-          min="0"
-          value={quantity}
-          onChange={handleQuantityChange}
-          style={{ width: "70px", textAlign: "center", marginTop: "5px" }}
-          placeholder="Qtd"
-          />
-      </div>
-    </PizzaInputContainer>
   );
 }

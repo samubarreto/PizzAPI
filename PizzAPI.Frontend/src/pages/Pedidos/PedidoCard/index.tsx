@@ -35,10 +35,11 @@ export default function PedidoCard({ pedido }: PedidoCardProps) {
       {pedidoEdit && <PedidoUpsertForm pedido={pedidoEdit} onClose={() => setPedidoEdit(undefined)} />}
       {pedidoDelete && <PedidoDeleteForm pedido={pedidoDelete} onClose={() => setPedidoDelete(undefined)} />}
       <PedidoCardContainer>
-        <StatusIndicator color={statusColors[pedido.status + 1]} />
+        <StatusIndicator color={statusColors[pedido.status]} />
         <div>
           <h3>Pedido {pedido._id} | STATUS: {TipoStatusPedido[pedido.status]}</h3>
           <p><strong>Endereço:</strong> {pedido.endereco}</p>
+          <p><strong>Cliente:</strong> {pedido.cliente}</p>
           {pizzasDoPedido.length > 0 && (
             <PizzaList>
               <strong>Pizzas:</strong>
