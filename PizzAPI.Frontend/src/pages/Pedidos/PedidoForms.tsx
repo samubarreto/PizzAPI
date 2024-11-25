@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { FundoPreto } from "../../components/FundoPreto/styles";
 import { Pedido } from "../../dtos/Pedido";
-import { deletarPedido, salvarPedido } from "../../services/pedidoService";
 import { BottomRow, CancelForm, Column, ConfirmForm, Form, FormInput, FormSelect, FormTextarea, FormTitle, MiddleRow, PizzaImg, PizzaInputContainer, Row, SelecaoPizza } from "./styles";
 import { TipoPagamentoPedido } from "../../dtos/enums/TipoPagamentoPedido";
 import { TipoStatusPedido } from "../../dtos/enums/TipoStatusPedido";
 import { Pizza } from "../../dtos/Pizza";
-import { getPizzas } from "../../services/pizzaService";
 import { PIZZA_PLACEHOLDER } from "../../services/utils";
+import { createCrudService } from "../../services/crudService";
 
 interface ModalPedidoProps {
   pedido: Partial<Pedido> | null;
@@ -24,10 +23,12 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
     pizzas: pedido?.pizzas || [],
   });
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
+  const pizzaService = createCrudService<Pizza>("pizza");
+  const pedidoService = createCrudService<Pedido>("pedido");
 
   const fetchPizzas = async () => {
     try {
-      const res = await getPizzas(0, 100000, "");
+      const res = await pizzaService.getItems(0, 100000, "");
       setPizzas(res);
     } catch (error: any) {
       console.error(error.message);
@@ -64,7 +65,7 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
         status: Number(formState.status),
       };
   
-      await salvarPedido(pedido?._id ? { ...payload, _id: pedido._id } : payload);
+      await pedidoService.save(pedido?._id ? { ...payload, _id: pedido._id } : payload);
   
       window.location.reload();
     } catch (error) {
@@ -219,9 +220,11 @@ function PizzaInput({ pizza, onQuantityChange }: PizzaInputProps) {
 }
 
 export function PedidoDeleteForm({ pedido, onClose }: ModalPedidoProps) {
+  const pedidoService = createCrudService<Pedido>("pedido");
+
   const handleDelete = async () => {
     if (pedido?._id) {
-      await deletarPedido(pedido._id);
+      await pedidoService.delete(pedido._id);
       window.location.reload();
     }
   };

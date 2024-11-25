@@ -7,7 +7,7 @@ import { NovoPedido, PedidosContainer, UpperContainer } from "./styles";
 import { Pedido } from "../../dtos/Pedido";
 import Pagination from "../../components/Pagination";
 import PedidoCard from "./PedidoCard";
-import { getCountPedidos, getPedidos } from "../../services/pedidoService";
+import { createCrudService } from "../../services/crudService";
 
 export default function Pedidos() {
   const [pedidos, setPedidos] = useState<Pedido[] | undefined>(undefined);
@@ -17,11 +17,12 @@ export default function Pedidos() {
   const [search, setSearch] = useState<string>(""); 
   const [loading, setLoading] = useState<boolean>(true); 
   const pageSize = 9;
+  const pedidoService = createCrudService<Pedido>("pedido");
 
   const fetchPedidos = async () => {
     try {
-      const res = await getPedidos((page - 1) * pageSize, pageSize, search);
-      const count = await getCountPedidos();
+      const res = await pedidoService.getItems((page - 1) * pageSize, pageSize, search);
+      const count = await pedidoService.count();
       setPedidos(res);
   
       const totalPages = count > 0 ? Math.ceil(count / pageSize) : 1;
