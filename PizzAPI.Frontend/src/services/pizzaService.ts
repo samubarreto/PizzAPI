@@ -20,7 +20,6 @@ export async function getCountPizzas() {
   return quantidadePizzas;
 }
 
-
 export async function deletarPizza(idPizza: string) {
   let request = {
     method: "DELETE"

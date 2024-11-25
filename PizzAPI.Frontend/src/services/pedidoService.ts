@@ -20,7 +20,6 @@ export async function getCountPedidos() {
   return quantidadePedidos;
 }
 
-
 export async function deletarPedido(idPedido: string) {
   let request = {
     method: "DELETE"

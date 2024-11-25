@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IPizzaService } from '../interfaces/IPizzaService';
+import { IPizzaService } from '../interfaces/ICrudService';
 import { Pizza } from '../entities/Pizza';
 
 export class PizzaController {
