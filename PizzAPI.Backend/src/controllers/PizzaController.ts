@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { IPizzaService } from '../interfaces/ICrudService';
 import { Pizza } from '../entities/Pizza';
+import { ICrudService } from '../interfaces/ICrudService';
 
 export class PizzaController {
-  constructor(private pizzaService: IPizzaService) { }
+  constructor(private pizzaService: ICrudService<Pizza>) { }
 
   count = async (req: Request, res: Response) => {
     const countPizzas = await this.pizzaService.count();
@@ -13,7 +13,7 @@ export class PizzaController {
   getPizzaById = async (req: Request, res: Response) => {
     const pizzaId = req.params["id"];
     try {
-      const pizza = await this.pizzaService.getPizzaById(pizzaId);
+      const pizza = await this.pizzaService.getById(pizzaId);
       if (pizza) {
         return res.status(200).json(pizza);
       }
@@ -28,7 +28,7 @@ export class PizzaController {
     const pageSize = parseInt(req.query["pageSize"] as string) || 10;
     const search = req.query["search"] as string || "";
     try {
-      const pizzas = await this.pizzaService.getPizzas(skip, pageSize, search);
+      const pizzas = await this.pizzaService.getItems(skip, pageSize, search);
       return res.status(200).json(pizzas);
     } catch (error) {
       return res.status(500).send({ message: "internal server error" });
@@ -43,7 +43,7 @@ export class PizzaController {
 
     if (!pizza._id) {
       try {
-        const result = await this.pizzaService.insertPizza(pizza);
+        const result = await this.pizzaService.insert(pizza);
         if (result) {
           return res.status(201).send({ message: "created" });
         }
@@ -53,7 +53,7 @@ export class PizzaController {
       }
     } else {
       try {
-        const result = await this.pizzaService.updatePizza(pizza);
+        const result = await this.pizzaService.update(pizza);
         if (result) {
           return res.status(200).send({ message: "ok" });
         }
@@ -67,7 +67,7 @@ export class PizzaController {
   deletePizza = async (req: Request, res: Response) => {
     const pizzaId = req.params["id"];
     try {
-      const result = await this.pizzaService.deletePizza(pizzaId);
+      const result = await this.pizzaService.delete(pizzaId);
       if (result) {
         return res.status(204).send({ message: "no content" });
       }

@@ -43,7 +43,7 @@ export default function PedidoCard({ pedido }: PedidoCardProps) {
           {pizzasDoPedido.length > 0 && (
             <PizzaList>
               <strong>Pizzas:</strong>
-              {pizzasDoPedido.map((pizza: Pizza, index: number) => (
+              {pizzasDoPedido && pizzasDoPedido.map((pizza: Pizza, index: number) => (
                 <li key={index}>
                   <strong>Sabor:</strong> {pizza.sabor} | <strong>Preço Unitário:</strong> R$ {pizza.preco!.toFixed(2)} | <strong>Quantidade:</strong> {pizza.quantidade}
                 </li>
@@ -52,6 +52,7 @@ export default function PedidoCard({ pedido }: PedidoCardProps) {
           )}
           <p><strong>Preço total:</strong> R$ {pedido.precoTotal?.toFixed(2)}</p>
           <p><strong>Forma de Pagamento:</strong> {TipoPagamentoPedido[pedido.metodoPagamento]}</p>
+          <p><strong>Data do pedido:</strong> {pedido.atualizadoEm.toString()}</p>
           { pedido.observacoes && <p><strong>OBS:</strong> {pedido.observacoes}</p> }
           
         </div>
