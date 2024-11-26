@@ -2,7 +2,7 @@
 
   # PizzAPI 🍕
   ###### Aplicação Web para cadastrar e administrar <br> sabores de Pizza e seus Pedidos
-  ![My Skills](https://skillicons.dev/icons?i=ts,react,nodejs,express,mongodb)
+  ![My Skills](https://skillicons.dev/icons?i=html,css,ts,react,nodejs,express,mongodb)
 
 </div>
 
