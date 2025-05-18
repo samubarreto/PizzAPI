@@ -17,8 +17,8 @@ import {
 import { TipoMassaPizza } from "../../dtos/enums/TipoMassaPizza";
 import { TipoRecheioBorda } from "../../dtos/enums/TipoRecheioBorda";
 import { TipoTamanhoPizza } from "../../dtos/enums/TipoTamanhoPizza";
-import { salvarPizza, deletarPizza } from "../../services/pizzaService";
 import { PIZZA_PLACEHOLDER } from "../../services/utils";
+import { createCrudService } from "../../services/crudService";
 
 interface ModalPizzaProps {
   pizza: Partial<Pizza> | null;
@@ -27,6 +27,7 @@ interface ModalPizzaProps {
 
 export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
   const [formState, setFormState] = useState<Partial<Pizza>>(pizza || {});
+  const pizzaService = createCrudService<Pizza>("pizza");
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
@@ -56,7 +57,7 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
       atualizadoEm: new Date(),
     };
   
-    await salvarPizza(normalizedFormState as unknown as Partial<Pizza>);
+    await pizzaService.save(normalizedFormState as unknown as Partial<Pizza>);
     window.location.reload();
   };
   
@@ -208,9 +209,11 @@ export function PizzaUpsertForm({ pizza, onClose }: ModalPizzaProps) {
 }
 
 export function PizzaDeleteForm({ pizza, onClose }: ModalPizzaProps) {
+  const pizzaService = createCrudService<Pizza>("pizza");
+
   const handleDelete = async () => {
     if (pizza?._id) {
-      await deletarPizza(pizza._id);
+      await pizzaService.delete(pizza._id);
       window.location.reload();
     }
   };

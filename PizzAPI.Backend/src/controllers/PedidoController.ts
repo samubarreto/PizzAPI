@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { IPedidoService } from '../interfaces/IPedidoService';
 import { Pedido } from '../entities/Pedido';
+import { ICrudService } from '../interfaces/ICrudService';
 
 export class PedidoController {
-  constructor(private pedidoService: IPedidoService) { }
+  constructor(private pedidoService: ICrudService<Pedido>) { }
 
   count = async (req: Request, res: Response) => {
     const countPedidos = await this.pedidoService.count();
@@ -13,7 +13,7 @@ export class PedidoController {
   getPedidoById = async (req: Request, res: Response) => {
     const pedidoId = req.params["id"];
     try {
-      const pedido = await this.pedidoService.getPedidoById(pedidoId);
+      const pedido = await this.pedidoService.getById(pedidoId);
       if (pedido) {
         return res.status(200).json(pedido);
       }
@@ -28,7 +28,7 @@ export class PedidoController {
     const pageSize = parseInt(req.query["pageSize"] as string) || 10;
     const search = req.query["search"] as string || "";
     try {
-      const pedidos = await this.pedidoService.getPedidos(skip, pageSize, search);
+      const pedidos = await this.pedidoService.getItems(skip, pageSize, search);
       return res.status(200).json(pedidos);
     } catch (error) {
       return res.status(500).send({ message: "internal server error" });
@@ -43,7 +43,7 @@ export class PedidoController {
 
     if (!pedido._id) {
       try {
-        const result = await this.pedidoService.insertPedido(pedido);
+        const result = await this.pedidoService.insert(pedido);
         if (result) {
           return res.status(201).send({ message: "created" });
         }
@@ -53,7 +53,7 @@ export class PedidoController {
       }
     } else {
       try {
-        const result = await this.pedidoService.updatePedido(pedido);
+        const result = await this.pedidoService.update(pedido);
         if (result) {
           return res.status(200).send({ message: "ok" });
         }
@@ -67,7 +67,7 @@ export class PedidoController {
   deletePedido = async (req: Request, res: Response) => {
     const pedidoId = req.params["id"];
     try {
-      const result = await this.pedidoService.deletePedido(pedidoId);
+      const result = await this.pedidoService.delete(pedidoId);
       if (result) {
         return res.status(204).send({ message: "no content" });
       }

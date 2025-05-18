@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { Pizza } from '../../dtos/Pizza'
-import { getCountPizzas, getPizzas } from "../../services/pizzaService";
 import { useNavigation } from "simple-react-routing";
 import { NovaPizza, PizzasContainer, UpperContainer } from "./styles";
 import Loader from "../../components/Loader";
@@ -9,6 +8,7 @@ import PizzaCard from "./PizzaCard";
 import Pagination from "../../components/Pagination";
 import SearchBar from "../../components/SearchBar";
 import { PedidosNavigator } from "../../components/Navigator";
+import { createCrudService } from "../../services/crudService";
 
 export default function Pizzas() {
   const [pizzas, setPizzas] = useState<Pizza[] | undefined>(undefined);
@@ -19,6 +19,7 @@ export default function Pizzas() {
   const [loading, setLoading] = useState<boolean>(true); 
   const pageSize = 5;
   const { navigateTo } = useNavigation();
+  const pizzaService = createCrudService<Pizza>("pizza");
 
   useEffect(() => {
     if (window.location.pathname === '/') {
@@ -28,8 +29,8 @@ export default function Pizzas() {
 
   const fetchPizzas = async () => {
     try {
-      const res = await getPizzas((page - 1) * pageSize, pageSize, search);
-      const count = await getCountPizzas();
+      const res = await pizzaService.getItems((page - 1) * pageSize, pageSize, search);
+      const count = await pizzaService.count();
       setPizzas(res);
   
       const totalPages = count > 0 ? Math.ceil(count / pageSize) : 1;

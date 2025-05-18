@@ -1,15 +1,12 @@
-<div align="center">
 
   # PizzAPI 🍕
-  ###### Aplicação Web para cadastrar e administrar <br> sabores de Pizza e seus Pedidos
-  ![My Skills](https://skillicons.dev/icons?i=ts,react,nodejs,express,mongodb)
-
-</div>
+  ###### Aplicação Web para cadastrar e administrar sabores de Pizza e seus Pedidos
+  ![My Skills](https://skillicons.dev/icons?i=html,css,ts,react,nodejs,express,mongodb)
 
 ---
 
 <details>
-  <summary align="center">Sobre o projeto</summary>
+  <summary>Sobre o projeto</summary>
   
   * Interface web com HTML, CSS, JS, TS e REACT.JS
   * Uma WEB API REST, feita com Node.js e Express.js com Typescript

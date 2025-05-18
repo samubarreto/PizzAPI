@@ -1,8 +1,8 @@
 import { Db, ObjectId } from "mongodb";
 import { Pizza } from "../entities/Pizza";
-import { IPizzaService } from "../interfaces/IPizzaService";
+import { ICrudService } from "../interfaces/ICrudService";
 
-export class PizzaService implements IPizzaService {
+export class PizzaService implements ICrudService<Pizza> {
   constructor(private db: Db) { }
 
   async count(): Promise<number> {
@@ -13,7 +13,7 @@ export class PizzaService implements IPizzaService {
     }
   }
 
-  async getPizzaById(id: string): Promise<Pizza | null> {
+  async getById(id: string): Promise<Pizza | null> {
     try {
       const pizza = await this.db.collection("pizzas").findOne({ _id: new ObjectId(id) });
       return pizza as Pizza | null;
@@ -22,7 +22,7 @@ export class PizzaService implements IPizzaService {
     }
   }
 
-  async getPizzas(skip: number, pageSize: number, search: string): Promise<Pizza[]> {
+  async getItems(skip: number, pageSize: number, search: string): Promise<Pizza[]> {
     const query = search
       ? {
         $or: [
@@ -40,7 +40,7 @@ export class PizzaService implements IPizzaService {
       .toArray() as unknown as Pizza[];
   }
 
-  async insertPizza(pizza: Pizza): Promise<boolean> {
+  async insert(pizza: Pizza): Promise<boolean> {
     try {
       pizza.criadoEm = new Date();
       pizza.atualizadoEm = new Date();
@@ -53,7 +53,7 @@ export class PizzaService implements IPizzaService {
     }
   }
 
-  async updatePizza(pizza: Pizza): Promise<boolean> {
+  async update(pizza: Pizza): Promise<boolean> {
     try {
       pizza.atualizadoEm = new Date();
       const { _id, ...updatedPizza } = pizza;
@@ -70,7 +70,7 @@ export class PizzaService implements IPizzaService {
     }
   }
 
-  async deletePizza(_id: string): Promise<boolean> {
+  async delete(_id: string): Promise<boolean> {
     try {
       const result = await this.db.collection("pizzas").deleteOne({ _id: new ObjectId(_id) });
       return result.deletedCount > 0;

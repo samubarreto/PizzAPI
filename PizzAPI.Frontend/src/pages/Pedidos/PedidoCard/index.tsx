@@ -3,9 +3,9 @@ import { Pedido } from "../../../dtos/Pedido";
 import { PedidoCardContainer, StatusIndicator, CardActions, PizzaList } from "./styles";
 import { PedidoDeleteForm, PedidoUpsertForm } from "../PedidoForms";
 import { statusColors, TipoStatusPedido } from "../../../dtos/enums/TipoStatusPedido";
-import { getPizzaById } from "../../../services/pizzaService";
 import { Pizza } from "../../../dtos/Pizza";
 import { TipoPagamentoPedido } from "../../../dtos/enums/TipoPagamentoPedido";
+import { createCrudService } from "../../../services/crudService";
 
 interface PedidoCardProps {
   pedido: Pedido;
@@ -15,12 +15,13 @@ export default function PedidoCard({ pedido }: PedidoCardProps) {
   const [pedidoEdit, setPedidoEdit] = useState<Pedido | undefined>(undefined);
   const [pedidoDelete, setPedidoDelete] = useState<Pedido | undefined>(undefined);
   const [pizzasDoPedido, setPizzasDoPedido] = useState<Pizza[]>([] as Pizza[]);
+  const pizzaService = createCrudService<Pizza>("pizza");
 
   useEffect(() => {
     const fetchPizzasDoPedido = async () => {
       const pizzas = await Promise.all(
         pedido.pizzas?.map(async (pizza) => {
-          const pizzaObj = await getPizzaById(pizza.pizzaId);
+          const pizzaObj = await pizzaService.getById(pizza.pizzaId);
           return { ...pizzaObj, quantidade: pizza.quantidade };
         })
       );
@@ -43,7 +44,7 @@ export default function PedidoCard({ pedido }: PedidoCardProps) {
           {pizzasDoPedido.length > 0 && (
             <PizzaList>
               <strong>Pizzas:</strong>
-              {pizzasDoPedido.map((pizza: Pizza, index: number) => (
+              {pizzasDoPedido && pizzasDoPedido.map((pizza: Pizza, index: number) => (
                 <li key={index}>
                   <strong>Sabor:</strong> {pizza.sabor} | <strong>Preço Unitário:</strong> R$ {pizza.preco ? pizza.preco.toFixed(2) : 0} | <strong>Quantidade:</strong> {pizza.quantidade}
                 </li>
@@ -52,6 +53,7 @@ export default function PedidoCard({ pedido }: PedidoCardProps) {
           )}
           <p><strong>Preço total:</strong> R$ {pedido.precoTotal ? pedido.precoTotal.toFixed(2) : 0}</p>
           <p><strong>Forma de Pagamento:</strong> {TipoPagamentoPedido[pedido.metodoPagamento]}</p>
+          <p><strong>Data do pedido:</strong> {pedido.atualizadoEm.toString()}</p>
           { pedido.observacoes && <p><strong>OBS:</strong> {pedido.observacoes}</p> }
           
         </div>

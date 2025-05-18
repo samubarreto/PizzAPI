@@ -1,8 +1,8 @@
 import { Db, ObjectId } from "mongodb";
 import { Pedido } from "../entities/Pedido";
-import { IPedidoService } from "../interfaces/IPedidoService";
+import { ICrudService } from "../interfaces/ICrudService";
 
-export class PedidoService implements IPedidoService {
+export class PedidoService implements ICrudService<Pedido> {
   constructor(private db: Db) { }
 
   async count(): Promise<number> {
@@ -13,7 +13,7 @@ export class PedidoService implements IPedidoService {
     }
   }
 
-  async getPedidoById(id: string): Promise<Pedido | null> {
+  async getById(id: string): Promise<Pedido | null> {
     try {
       const pedido = await this.db.collection("pedidos").findOne({ _id: new ObjectId(id) });
       return pedido as Pedido | null;
@@ -22,7 +22,7 @@ export class PedidoService implements IPedidoService {
     }
   }
 
-  async getPedidos(skip: number, pageSize: number, search: string): Promise<Pedido[]> {
+  async getItems(skip: number, pageSize: number, search: string): Promise<Pedido[]> {
     const query = search
       ? {
         $or: [
@@ -40,7 +40,7 @@ export class PedidoService implements IPedidoService {
       .toArray() as unknown as Pedido[];
   }
 
-  async insertPedido(pedido: Pedido): Promise<boolean> {
+  async insert(pedido: Pedido): Promise<boolean> {
     try {
       pedido.criadoEm = new Date();
       pedido.atualizadoEm = new Date();
@@ -70,7 +70,7 @@ export class PedidoService implements IPedidoService {
     }
   }
 
-  async updatePedido(pedido: Pedido): Promise<boolean> {
+  async update(pedido: Pedido): Promise<boolean> {
     try {
       pedido.atualizadoEm = new Date();
       const { _id, ...updatedPedido } = pedido;
@@ -103,7 +103,7 @@ export class PedidoService implements IPedidoService {
     }
   }
 
-  async deletePedido(id: string): Promise<boolean> {
+  async delete(id: string): Promise<boolean> {
     try {
       const result = await this.db.collection("pedidos").deleteOne({ _id: new ObjectId(id) });
       return result.deletedCount > 0;
