@@ -46,7 +46,7 @@ export default function PizzaCard({ pizza }: PizzaCardProps) {
             <BotaoPizza onClick={() => setPizzaEdit(pizza)}>✏️Editar</BotaoPizza>
             <BotaoPizza onClick={() => setPizzaDelete(pizza)}>🗑️Deletar</BotaoPizza>
           </div>
-          <PizzaPreco>R$ {pizza.preco.toFixed(2)}</PizzaPreco>
+          <PizzaPreco>R$ {pizza.preco ? pizza.preco.toFixed(2) : 0}</PizzaPreco>
         </BottomContainer>
       </PizzaCardContainer>
     </>

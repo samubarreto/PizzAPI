@@ -6,6 +6,6 @@ interface SearchBarProps {
 
 export default function SearchBar({ onChange }: SearchBarProps) {
   return (
-    <SearchBarInput placeholder="🔍 Busque sua Pizza favorita pelo sabor, descrição ou preço" onChange={onChange}/>
+    <SearchBarInput id="searchbar" placeholder="🔍 Busque sua Pizza favorita pelo sabor, descrição ou preço" onChange={onChange}/>
   );
 }

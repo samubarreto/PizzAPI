@@ -159,7 +159,7 @@ export function PedidoUpsertForm({ pedido, onClose }: ModalPedidoProps) {
         <Row>
           <label>Pizzas:</label>
           {pizzas.length > 0 && (
-            <SelecaoPizza>
+            <SelecaoPizza id="pizzas-selecionaveis">
               {pizzas.map((pizza) => (
                 <PizzaInput
                   key={pizza._id}
@@ -203,10 +203,11 @@ function PizzaInput({ pizza, onQuantityChange }: PizzaInputProps) {
           target.src = PIZZA_PLACEHOLDER;
         }}
       />
-      <p>{pizza.sabor} | R$ {pizza.preco.toFixed(2)}</p>
+      <p>{pizza.sabor} | R$ {pizza.preco ? pizza.preco.toFixed(2) : 0}</p>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
         <label style={{ padding:0 }} >Quantidade:</label>
         <FormInput
+          id={`pizza-select-${pizza.sabor}`}
           style={{maxWidth: '50px'}}
           type="number"
           min="0"

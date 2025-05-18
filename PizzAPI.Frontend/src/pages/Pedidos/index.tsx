@@ -47,7 +47,7 @@ export default function Pedidos() {
         <NovoPedido onClick={() => setPedidoInsert({} as Pedido)}>Novo Pedido ➕</NovoPedido>
       </UpperContainer>
       
-      { pedidos && <PedidosContainer>{ pedidos?.map((pedido) => (<PedidoCard key={pedido._id} pedido={pedido} />)) }</PedidosContainer>}
+      { pedidos && <PedidosContainer id="pedidos-container">{ pedidos?.map((pedido) => (<PedidoCard key={pedido._id} pedido={pedido} />)) }</PedidosContainer>}
       { pedidos && <Pagination currentPage={page} totalPages={totalPages} onChangePage={setPage} /> }
     </>
   );

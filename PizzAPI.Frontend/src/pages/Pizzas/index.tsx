@@ -53,11 +53,11 @@ export default function Pizzas() {
       <UpperContainer>
         <PedidosNavigator/>
         <SearchBar onChange={(e) => setSearch(e.target.value)} />
-        <NovaPizza onClick={() => setPizzaInsert({} as Pizza)}>Nova Pizza ➕</NovaPizza>
+        <NovaPizza id="nova-pizza" onClick={() => setPizzaInsert({} as Pizza)}>Nova Pizza ➕</NovaPizza>
       </UpperContainer>
       
-      { pizzas && <PizzasContainer>{ pizzas?.map((pizza) => (<PizzaCard key={pizza._id} pizza={pizza} />)) }</PizzasContainer>}
-      { pizzas && <Pagination currentPage={page} totalPages={totalPages} onChangePage={setPage} /> }
+      { pizzas && <PizzasContainer id="pizzas-container">{ pizzas?.map((pizza) => (<PizzaCard key={pizza._id} pizza={pizza} />)) }</PizzasContainer>}
+      { pizzas && <Pagination key={"pizza-pagination"} currentPage={page} totalPages={totalPages} onChangePage={setPage} /> }
     </>
   );
 }

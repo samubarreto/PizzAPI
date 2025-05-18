@@ -19,7 +19,7 @@ export default function PedidoCard({ pedido }: PedidoCardProps) {
   useEffect(() => {
     const fetchPizzasDoPedido = async () => {
       const pizzas = await Promise.all(
-        pedido.pizzas.map(async (pizza) => {
+        pedido.pizzas?.map(async (pizza) => {
           const pizzaObj = await getPizzaById(pizza.pizzaId);
           return { ...pizzaObj, quantidade: pizza.quantidade };
         })
@@ -45,12 +45,12 @@ export default function PedidoCard({ pedido }: PedidoCardProps) {
               <strong>Pizzas:</strong>
               {pizzasDoPedido.map((pizza: Pizza, index: number) => (
                 <li key={index}>
-                  <strong>Sabor:</strong> {pizza.sabor} | <strong>Preço Unitário:</strong> R$ {pizza.preco!.toFixed(2)} | <strong>Quantidade:</strong> {pizza.quantidade}
+                  <strong>Sabor:</strong> {pizza.sabor} | <strong>Preço Unitário:</strong> R$ {pizza.preco ? pizza.preco.toFixed(2) : 0} | <strong>Quantidade:</strong> {pizza.quantidade}
                 </li>
               ))}
             </PizzaList>
           )}
-          <p><strong>Preço total:</strong> R$ {pedido.precoTotal?.toFixed(2)}</p>
+          <p><strong>Preço total:</strong> R$ {pedido.precoTotal ? pedido.precoTotal.toFixed(2) : 0}</p>
           <p><strong>Forma de Pagamento:</strong> {TipoPagamentoPedido[pedido.metodoPagamento]}</p>
           { pedido.observacoes && <p><strong>OBS:</strong> {pedido.observacoes}</p> }
           
